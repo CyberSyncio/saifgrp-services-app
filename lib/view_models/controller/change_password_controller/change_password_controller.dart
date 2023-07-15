@@ -30,28 +30,39 @@ class ChangePasswordController extends GetxController {
 
   void changePasswordApi() async {
     loading.value = true;
-    var data = {
-      "new_password1": passwordController.value.text,
-      "new_password2": confirmPasswordController.value.text
-    };
 
-    try {
-      var response = await _api.changePasswordApi(_header, data);
+    String newPassword1 = passwordController.value.text;
+    String newPassword2 = confirmPasswordController.value.text;
+
+    if (newPassword1 != newPassword2) {
+      Utils.snackBar("Error", "New password and confirm password mismatched",
+          action: "error");
       loading.value = false;
-      if (response != null) {
-        Utils.snackBar("Success", "Password updated successfully",
-            action: "success");
-        passwordController.value.text = '';
-        confirmPasswordController.value.text = '';
-        currentpasswordController.value.text = '';
-        update();
-        // Perform any additional actions after the password is updated
-      } else {
-        Utils.snackBar("Error", "Failed to update password");
+    } else {
+      var data = {
+        "new_password1": newPassword1,
+        "new_password2": newPassword2
+      };
+
+      try {
+        var response = await _api.changePasswordApi(_header, data);
+        loading.value = false;
+        if (response != null) {
+          Utils.snackBar("Success", "Password updated successfully",
+              action: "success");
+          passwordController.value.text = '';
+          confirmPasswordController.value.text = '';
+          currentpasswordController.value.text = '';
+          update();
+        } else {
+          Utils.snackBar("Error", "Failed to update password", action: "error");
+        }
+      } catch (error) {
+        loading.value = false;
+        print(error);
+        Utils.snackBar("Error", "Failed to update password: $error",
+            action: "error");
       }
-    } catch (error) {
-      loading.value = false;
-      Utils.snackBar("Error", "Failed to update password: $error");
     }
   }
 }

@@ -5,7 +5,7 @@ class BuildingController extends GetxController {
   final _buildingRepo = BuildingRepository();
   List buildingModel = [].obs;
   RxBool isLoading = true.obs;
-
+  RxBool isRefresh = true.obs;
   @override
   void onInit() async {
     await getBuilding();
@@ -14,7 +14,9 @@ class BuildingController extends GetxController {
 
   getBuilding() async {
     buildingModel = await _buildingRepo.getAllBuildings();
-    isLoading.value = false;
+    isLoading = false.obs;
+    isRefresh = false.obs;
+
     update();
   }
 }

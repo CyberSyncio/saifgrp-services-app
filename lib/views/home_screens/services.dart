@@ -7,19 +7,27 @@ import '../../utils/services_grid.dart';
 import '../../view_models/controller/service_controller/service_controller.dart';
 
 class ServiceScreen extends StatefulWidget {
-  const ServiceScreen({super.key});
+  const ServiceScreen({Key? key}) : super(key: key);
 
   @override
   State<ServiceScreen> createState() => _ServiceScreenState();
 }
 
 class _ServiceScreenState extends State<ServiceScreen> {
-  var argumentsData = Get.arguments;
+  Future<void> _loadData(bool reload) async {
+    await Get.find<ServicesController>().getservices();
+  }
+
+  @override
+  void initState() {
+    _loadData(true);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
@@ -27,21 +35,33 @@ class _ServiceScreenState extends State<ServiceScreen> {
           title: Text(
             'Services',
             style: GoogleFonts.montserrat(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 1,
-                color: AppColor.kWhiteColor),
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1,
+              color: AppColor.kWhiteColor,
+            ),
           ),
           centerTitle: true,
           backgroundColor: AppColor.kbackGroundColor,
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: height * .03),
-              GetBuilder<ServicesController>(
+        body: RefreshIndicator(
+          triggerMode: RefreshIndicatorTriggerMode.onEdge,
+          edgeOffset: 10,
+          displacement: 200,
+          strokeWidth: 2,
+          color: AppColor.kPrimaryColor,
+          backgroundColor: AppColor.kWhiteColor,
+          semanticsLabel: "Fetching services...",
+          semanticsValue: "Fetching services...",
+          onRefresh: () async {
+            await _loadData(true);
+          },
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: height * .03),
+                GetBuilder<ServicesController>(
                   init: ServicesController(),
                   builder: (controller) {
                     return controller.isLoading == true
@@ -51,15 +71,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
                             ),
                           )
                         : Expanded(
-                            child: GridView.builder(
-                                // physics: const NeverScrollableScrollPhysics(),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: GridView.builder(
                                 itemCount: controller.serviceListModel.length,
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  // childAspectRatio: 1 / 1.3,
+                                  childAspectRatio: 1.2 / 1.1,
+                                  mainAxisSpacing: 10,
+                                  crossAxisSpacing: 10,
                                 ),
                                 itemBuilder: (context, index) {
                                   return serviceGrid(
@@ -71,9 +93,14 @@ class _ServiceScreenState extends State<ServiceScreen> {
                                         .serviceListModel[index]["id"]
                                         .toString(),
                                   );
-                                }));
-                  })
-            ],
+                                },
+                              ),
+                            ),
+                          );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

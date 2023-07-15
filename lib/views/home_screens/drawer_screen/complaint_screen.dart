@@ -48,9 +48,10 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                       : controller.requestList.isEmpty
                           ? Center(
                               child: Text(
-                                'No Complaint Found',
+                                "You haven't filed any complaint",
                                 style: GoogleFonts.montserrat(
                                   fontSize: 18,
+                                  color: Colors.redAccent,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -58,57 +59,45 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                           : ListView.builder(
                               itemCount: controller.requestList.length,
                               itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    child: Card(
-                                      color: const Color.fromARGB(
-                                          255, 45, 151, 209),
-                                      elevation: 4,
-                                      child: ListTile(
-                                          title: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              controller.requestList[index]
-                                                  ['service']['name'],
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
+                                return Column(
+                                  children: [
+                                    ListTile(
+                                      title: Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: Text(
+                                          controller.requestList[index]
+                                              ['service']['name'],
+                                          style: const TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          subtitle: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              controller.requestList[index]
-                                                  ['description'],
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
+                                        ),
+                                      ),
+                                      subtitle: Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: Text(
+                                          controller.requestList[index]
+                                              ['description'],
+                                          style: const TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          trailing: const Icon(
-                                            Icons.verified_outlined,
-                                            color: Colors.white,
-                                            size: 29,
-                                          )
-
-                                          //  Text(
-                                          //   controller.requestList[index]
-                                          //       ['status'],
-                                          //   style: const TextStyle(
-                                          //     color: Colors.white,
-                                          //     fontSize: 12,
-                                          //     fontWeight: FontWeight.bold,
-                                          //   ),
-                                          // )
-
-                                          ),
+                                        ),
+                                      ),
+                                      trailing: const Icon(
+                                        Icons.verified_outlined,
+                                        color: Colors.black54,
+                                        size: 29,
+                                      ),
                                     ),
-                                  ),
+                                    const Divider(
+                                      color: Colors.grey,
+                                      height: 1,
+                                      thickness: 1
+                                    ),
+                                  ],
                                 );
                               },
                             );

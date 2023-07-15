@@ -194,7 +194,9 @@ class _RegisterState extends State<Register> {
                       ],
                     )),
 
-                const SizedBox(height: 12),
+                SizedBox(
+                  height: MediaQuery.sizeOf(context).height * .020,
+                ),
 
                 Obx(
                   () => CustomButton(

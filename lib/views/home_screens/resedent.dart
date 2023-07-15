@@ -76,26 +76,33 @@ class HousesWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              title1,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800,
+                        Expanded(
+                          // Use Expanded to make sure the Text widget takes available space.
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title1,
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                                overflow: TextOverflow.ellipsis, // Handles text overflow with an ellipsis.
+                                maxLines: 1, // Set the number of lines you want to display (1 line in this case).
                               ),
-                            ),
-                            Text(
-                              title2.replaceRange(29, title2.length, '...'),
-                              style: GoogleFonts.montserrat(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
+                              Text(
+                                title2,
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                overflow: TextOverflow.ellipsis, // Handles text overflow with an ellipsis.
+                                maxLines: 1, // Set the number of lines you want to display (1 line in this case).
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

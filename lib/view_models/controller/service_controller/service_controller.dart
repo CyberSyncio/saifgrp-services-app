@@ -5,6 +5,7 @@ class ServicesController extends GetxController {
   final _servicesRepo = ServicesRepository();
   List serviceListModel = [].obs;
   RxBool isLoading = true.obs;
+  RxBool isRefresh = true.obs;
   @override
   void onInit() async {
     await getservices();
@@ -13,9 +14,9 @@ class ServicesController extends GetxController {
 
   getservices() async {
     serviceListModel = await _servicesRepo.getServices();
-   
-     isLoading = false.obs;
-     print(serviceListModel);
+    isRefresh = false.obs;
+    isLoading = false.obs;
+    print(serviceListModel);
     update();
   }
 }

@@ -16,6 +16,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
@@ -53,13 +54,13 @@ class ForgetPasswordScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.sizeOf(context).height * .03,
+                    height: MediaQuery.sizeOf(context).height * .02,
                   ),
                   SizedBox(
                     width: 300,
                     child: Text(
-                      "Have you forget your Password don't worry just entered your email you have registered with.",
-                      textAlign: TextAlign.justify,
+                      "Forgot password? Enter your email below to get a new one.",
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.firaSans(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -71,7 +72,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     height: MediaQuery.sizeOf(context).height * .02,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: TextFormField(
                       controller:
                           forgetPasswordController.emailController.value,
@@ -94,7 +95,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.sizeOf(context).height * .05,
+                    height: MediaQuery.sizeOf(context).height * .02,
                   ),
                   Obx(
                     () => CustomButton(

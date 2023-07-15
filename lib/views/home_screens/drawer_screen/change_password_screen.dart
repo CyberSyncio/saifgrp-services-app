@@ -88,6 +88,8 @@ class ChangePasswordScreen extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.sizeOf(context).width * .9,
                     child: TextFormField(
+                      obscureText: true,
+                      obscuringCharacter: "*",
                       controller:
                           changePasswordController.passwordController.value,
                       focusNode:
@@ -117,6 +119,8 @@ class ChangePasswordScreen extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.sizeOf(context).width * .9,
                     child: TextFormField(
+                      obscureText: true,
+                      obscuringCharacter: "*",
                       controller: changePasswordController
                           .confirmPasswordController.value,
                       focusNode: changePasswordController
@@ -145,7 +149,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                   Obx(
                     () => CustomButton(
-                      title: "Chnage Password",
+                      title: "Submit",
                       textStyle: GoogleFonts.firaSans(
                         fontSize: 20.0,
                         color: AppColor.kWhiteColor,
@@ -157,9 +161,6 @@ class ChangePasswordScreen extends StatelessWidget {
                           : () {
                               if (_formKey.currentState!.validate()) {
                                 changePasswordController.changePasswordApi();
-                                Utils.snackBar("Change Passowrd",
-                                    "Change password was successfully");
-                                print(changePasswordController);
                               }
                             },
                     ),

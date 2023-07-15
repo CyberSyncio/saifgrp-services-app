@@ -32,7 +32,7 @@ class RequestScreen extends StatelessWidget {
             ),
           ),
           title: Text(
-            'Request Form',
+            'File a Complain',
             style: GoogleFonts.montserrat(
               fontSize: 24,
               fontWeight: FontWeight.w600,
@@ -49,7 +49,7 @@ class RequestScreen extends StatelessWidget {
               children: [
                 SizedBox(height: height * .02),
                 Text(
-                  'What Problem Are You Facing',
+                  'Kindly describe your issue/problem.',
                   style: GoogleFonts.firaSans(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -74,15 +74,15 @@ class RequestScreen extends StatelessWidget {
                       maxLines: 20,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return Utils.snackBar("Empty Request",
-                              "Please  Enter your Description");
+                          return Utils.snackBar("Missing",
+                              "Fields must not be empty", action: "error");
                         }
                         return null;
                       },
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(16),
-                        hintText: 'Enter your application or problem here',
+                        hintText: 'Electrical malfunction in the house: Need a qualified electrician to inspect and fix the wiring issue',
                       ),
                     ),
                   ),

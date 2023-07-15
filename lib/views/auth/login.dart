@@ -38,7 +38,7 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * .01,
+                  height: MediaQuery.sizeOf(context).height * .02,
                 ),
                 Text('Welcome Back!',
                     style: GoogleFonts.firaSans(
@@ -47,7 +47,7 @@ class Login extends StatelessWidget {
                         letterSpacing: 1,
                         color: AppColor.kPrimaryColor)),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * .04,
+                  height: MediaQuery.sizeOf(context).height * .02,
                 ),
                 Form(
                     key: _formKey,
@@ -87,9 +87,7 @@ class Login extends StatelessWidget {
                             filled: false,
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 12),
                         TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {}
@@ -121,30 +119,28 @@ class Login extends StatelessWidget {
                         ),
                       ],
                     )),
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height * .012,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 180,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 250),
-                  child: InkWell(
-                    onTap: () => Get.toNamed(RoutesName.forgetPasswordScreen),
-                    child: Text(
-                      'Forget Password?',
-                      style: GoogleFonts.firaSans(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
+                const SizedBox(height: 12),
+                InkWell(
+                  onTap: () => Get.toNamed(RoutesName.forgetPasswordScreen),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 6),
+                        child: Text(
+                          'Forget Password?',
+                          style: GoogleFonts.firaSans(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.sizeOf(context).height * .012,
+                  height: MediaQuery.sizeOf(context).height * .020,
                 ),
                 Obx(
                   () => CustomButton(
@@ -164,7 +160,7 @@ class Login extends StatelessWidget {
                                       loginController
                                           .passwordController.value.text.isEmpty
                                   ? Utils.snackBar('Login',
-                                      "email and password is required to login")
+                                      "email and password is required to login", action: "error")
                                   : loginController.loginApi();
                             }
                           },

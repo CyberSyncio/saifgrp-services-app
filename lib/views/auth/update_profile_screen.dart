@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:saif_app/resources/colors/app_colors.dart';
 import 'package:saif_app/resources/routes/routes_name.dart';
 import 'package:saif_app/utils/utils.dart';
@@ -23,6 +24,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       Get.put(UpdateProfileController());
   final _formKey = GlobalKey<FormState>();
   File? image;
+
   @override
   void initState() {
     UpdateProfileController updateprofileController =
@@ -74,46 +76,23 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.sizeOf(context).height * .05,
+                  height: MediaQuery.sizeOf(context).height * .06,
                 ),
                 SizedBox(
-                  height: height * .16,
-                  width: width * .4,
-                  child: Stack(children: [
-                    Positioned(
-                      top: 0,
-                      left: 5,
-                      child: SizedBox(
-                        height: height * .16,
-                        width: width * .35,
-                        child: CircleAvatar(
-                          backgroundColor:
-                              const Color.fromARGB(255, 167, 209, 231),
-                          child: Image.asset(
-                            AppImages.avater2,
-                            height: height * .12,
-                            width: width * .26,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                        top: 70,
-                        left: 110,
-                        child: InkWell(
-                          onTap: () => pickImage(),
-                          child: Icon(
-                            Icons.edit,
-                            color: AppColor.kbackGroundColor,
-                            size: 40,
-                          ),
-                        ))
-                  ]),
-                ),
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height * .05,
-                ),
+                    height: MediaQuery.sizeOf(context).height * .2,
+                    child: Lottie.asset(
+                      'assets/images/login.json',
+                      width: 170,
+                      height: MediaQuery.sizeOf(context).height * .2,
+                    )),
+                const SizedBox(height: 12),
+                Text('Update Profile',
+                    style: GoogleFonts.firaSans(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1,
+                        color: AppColor.kPrimaryColor)),
+                const SizedBox(height: 20),
                 GetBuilder<UpdateProfileController>(
                   init: UpdateProfileController(),
                   builder: (controller) {
@@ -128,16 +107,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     GoogleFonts.montserrat(color: Colors.black),
                                 focusNode: controller.userNameFocusNode.value,
                                 controller: controller.userNameController.value,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    Utils.snackBar(
-                                        "Username", "Enter Username");
-                                  }
-                                  return null;
-                                },
+
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.email_outlined,
-                                      color: AppColor.kbackGroundColor),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
                                       borderSide: BorderSide(
@@ -158,25 +129,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               ),
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
                             //TODO Login password
                             TextFormField(
                               style: GoogleFonts.montserrat(
                                   color: AppColor.blackColor),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  Utils.snackBar("Password", "Enter password");
-                                }
-                                return null;
-                              },
+
                               focusNode: controller.firstNameFocusNode.value,
                               controller: controller.firstNameController.value,
 
                               // obscuringCharacter: "*",
                               decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.lock,
-                                    color: AppColor.kbackGroundColor),
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: BorderSide(
@@ -195,14 +159,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 filled: false,
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             TextFormField(
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  Utils.snackBar("Password", "Enter password");
-                                }
-                                return null;
-                              },
+
                               focusNode: controller.lastNameFocusNode.value,
                               controller: controller.lastNameController.value,
 
@@ -210,8 +171,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   color: AppColor.blackColor),
                               // obscuringCharacter: "*",
                               decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.lock,
-                                    color: AppColor.kbackGroundColor),
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: BorderSide(
@@ -230,26 +189,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 filled: false,
                               ),
                             ),
-
-                            SizedBox(
-                              height: MediaQuery.sizeOf(context).height * .02,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
                           ],
                         ));
                   },
-                ),
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height * .02,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 Obx(
                   () => CustomButton(
-                    title: "Update Profile",
+                    title: "Submit",
                     textStyle: GoogleFonts.montserrat(
                       fontSize: 20.0,
                       color: AppColor.kWhiteColor,
@@ -262,8 +211,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             if (_formKey.currentState!.validate()) {
                               updateprofileController.updateProfileApi();
                             } else {
-                              Utils.snackBar('Update Profile',
-                                  'Kindly Enter Email And password');
+                              Utils.snackBar('Missing',
+                                  'Please fill all the fields', action: 'error');
                             }
                           },
                     // isLoading: loginController.loading.value,

@@ -1,7 +1,7 @@
 class AppImages {
   static const String splashScreen = "assets/images/logo.png";
   static const String saifLogo = "assets/images/saiflogo.png";
-  static const String saifLogowhite = "assets/images/Saiflogowhite.png";
+  static const String saifLogowhite = "assets/images/mainlogo.png";
   static const String saifmenu = "assets/images/menu.png";
   static const String ac = "assets/images/ac.png";
   static const String carp = "assets/images/carp.png";
