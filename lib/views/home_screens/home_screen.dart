@@ -73,17 +73,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: InkWell(
                         onTap: () => Scaffold.of(context).openDrawer(),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset(AppImages.icon, height: 35),
-                            const SizedBox(width: 12),
-                            Text(
-                              "Saif Group",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 18.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 7),
+                              child: Text(
+                                "Saif Group",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 18.0,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1,
+                                ),
                               ),
+                            ),
+                            const SizedBox(width: 12),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: Icon(Icons.menu, size: 40, color: Colors.white,),
                             )
                           ],
                         ),

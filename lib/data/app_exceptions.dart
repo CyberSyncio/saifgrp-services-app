@@ -5,7 +5,7 @@ class AppExceptions implements Exception {
 
   @override
   String toString() {
-    return "$_message$_prefix";
+    return "$_message";
   }
 }
 
@@ -22,7 +22,7 @@ class ServerException extends AppExceptions {
 }
 
 class InvalidUrlException extends AppExceptions {
-  InvalidUrlException([String? message]) : super(message, "Invalid Url");
+  InvalidUrlException([String? message]) : super(message);
 }
 
 class FetchDataException extends AppExceptions {

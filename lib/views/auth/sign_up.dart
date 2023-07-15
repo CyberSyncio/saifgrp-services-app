@@ -211,23 +211,8 @@ class _RegisterState extends State<Register> {
                         ? null
                         : () {
                             registerController.getBuildingId();
-                            if (_formKey.currentState!.validate()) {
-                              registerController
-                                          .emailController.value.text.isEmpty ||
-                                      registerController.passwordController
-                                          .value.text.isEmpty ||
-                                      registerController
-                                          .confirmPasswordController
-                                          .value
-                                          .text
-                                          .isEmpty ||
-                                      registerController
-                                          .buildingId.value.isEmpty
-                                  ? Utils.snackBar(
-                                      "Missing", "Kindly fill all the fields",
-                                      action: "error")
-                                  : registerController.registerApi();
-                            }
+                            registerController.registerApi();
+
                           },
                   ),
                 ),

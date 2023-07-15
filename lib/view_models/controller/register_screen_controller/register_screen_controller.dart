@@ -69,15 +69,20 @@ class RegisterController extends GetxController {
       "password2": confirmPasswordController.value.text,
       "building": buildingId.value
     };
+
     _api.registerApi(data).then((value) {
       loading.value = false;
-      Utils.snackBar("Registration ", "Sucessfully Registered",
-          action: "success");
+      Utils.snackBar("Registration ", "Sucessfully Registered", action: "success");
+      emailController.value.clear();
+      passwordController.value.clear();
+      confirmPasswordController.value.clear();
+      // buildingId.value.clear();
       Get.toNamed(RoutesName.loginScreen);
+
     }).onError((error, stackTrace) {
-      print(error.toString());
       loading.value = false;
-      Utils.snackBar("Error", 'Something Went Wrong Please Try Again',
+
+      Utils.snackBar("Error", error.toString(),
           action: "error");
     });
   }

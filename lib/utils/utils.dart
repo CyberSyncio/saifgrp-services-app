@@ -17,7 +17,7 @@ class Utils {
     var backgroundColor = AppColor.blackColor;
 
     if (action == "success") {
-      backgroundColor = Colors.greenAccent;
+      backgroundColor = Colors.green;
     } else if (action == "error") {
       backgroundColor = Colors.redAccent;
     } else if (action == "warning") {
@@ -25,7 +25,7 @@ class Utils {
     } else if (action == "info") {
       backgroundColor = AppColor.kPrimaryColor;
     } else if (action == "debug") {
-      backgroundColor = Colors.greenAccent;
+      backgroundColor = Colors.black54;
     } else {
       backgroundColor = Colors.grey;
     }

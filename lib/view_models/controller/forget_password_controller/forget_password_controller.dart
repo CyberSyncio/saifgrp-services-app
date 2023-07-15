@@ -21,7 +21,7 @@ class ForgetPasswordController extends GetxController {
     };
     _api.forgetPasswordApi(data).then((value) {
       loading.value = false;
-      Utils.snackBar("", "Password reset e-mail has been sent to your account");
+      Utils.snackBar("Success", "Password reset e-mail has been sent to your account", action: "success");
     }).onError((error, stackTrace) {
       print(error.toString());
       loading.value = false;

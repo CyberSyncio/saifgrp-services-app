@@ -16,6 +16,7 @@ class LoginController extends GetxController {
   final passwordFocusNode = FocusNode().obs;
   RxBool loading = false.obs;
   StoreUserData userData = StoreUserData();
+
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
   final BuildingController _building = Get.put(BuildingController());
 
@@ -27,25 +28,32 @@ class LoginController extends GetxController {
   }
 
   loginApi() {
+
     loading.value = true;
     update();
+
     var data = {
       "email": emailController.value.text,
       "password": passwordController.value.text
     };
+
     _api.loginApi(data).then((value) async {
-      Utils.snackBar("Login", "Login Successful");
       await userData.login(value['key']);
+
       Get.toNamed(RoutesName.dasboardScreen);
+
       emailController.value.clear();
       passwordController.value.clear();
       loading.value = false;
       update();
+
     }).onError((error, stackTrace) {
+
       passwordController.value.clear();
-      Utils.snackBar("Login ", "Please Enter A valid Email Or Password");
+      Utils.snackBar("Error", error.toString(), action: "error");
       loading.value = false;
       update();
+
     });
   }
 }

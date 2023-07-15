@@ -95,10 +95,9 @@ class NetworkApiService extends BaseApiServices {
         return responseJsn;
       case 201:
         dynamic responseJsn = jsonDecode(response.body);
-        print(responseJsn);
         return responseJsn;
       case 400:
-        throw InvalidUrlException();
+        throw InvalidUrlException(response.body);
       case 500:
         throw ServerException();
       default:
