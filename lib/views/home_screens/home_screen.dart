@@ -154,8 +154,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 35,
+                          SizedBox(
+                            height: height * 0.035,
                           ),
                           GestureDetector(
                             onTap: () => Get.toNamed(RoutesName.serviceScreen),
