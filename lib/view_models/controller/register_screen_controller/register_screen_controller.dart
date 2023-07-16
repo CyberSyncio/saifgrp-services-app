@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saif_app/resources/routes/routes_name.dart';
@@ -72,17 +74,40 @@ class RegisterController extends GetxController {
 
     _api.registerApi(data).then((value) {
       loading.value = false;
-      Utils.snackBar("Registration ", "Sucessfully Registered", action: "success");
+      Utils.snackBar("Registration ", "Sucessfully Registered",
+          action: "success");
       emailController.value.clear();
       passwordController.value.clear();
       confirmPasswordController.value.clear();
       // buildingId.value.clear();
       Get.toNamed(RoutesName.loginScreen);
-
     }).onError((error, stackTrace) {
       loading.value = false;
+      var errorr = jsonDecode(error.toString());
 
-      Utils.snackBar("Error", error.toString(),
+      print(error.toString());
+      Utils.snackBar(
+          "Error",
+          emailController.value.text.isEmail &&
+                  emailController.value.text.isEmpty
+              ? "${" Email: " + errorr['username'][0] + "\nPasssword: " + errorr['password'][0]} \nConfirm Password: " +
+                  errorr['password2'][0]
+              : emailController.value.text.isEmpty
+                  ? " Email: " + errorr['username'][0]
+                  : passwordController.value.text.isEmpty &&
+                          emailController.value.text.isEmpty
+                      ? "${"Email: " + errorr['username'][0]}\nPassword: " +
+                          errorr['password'][0]
+                      : confirmPasswordController.value.text.isEmpty &&
+                              emailController.value.text.isEmpty
+                          ? "${"Email: " + errorr['username'][0]}\nConfirm Password: " +
+                              errorr['password2'][0]
+                          : passwordController.value.text.isEmpty
+                              ? "${errorr['email'][0] + "\nPassword: " + errorr['password'][0]}"
+                              : confirmPasswordController.value.text.isEmpty
+                                  ? "${errorr['email'][0] + "\nConfirm Password: " + errorr['password2'][0]}"
+                                  : "${errorr['email'][0] + "\nPasssword: " + errorr['password'][0]} \nConfirm Password: " +
+                                      errorr['password2'][0],
           action: "error");
     });
   }

@@ -37,17 +37,13 @@ class RequestController extends GetxController {
       loading.value = false;
       print(value);
       Utils.snackBar("Request", "Request is Sent Successfully",
-          action: "success");
+          action: 'success');
 
       // Clear the text after successful request
       descriptionController.value.clear();
     }).onError((error, stackTrace) {
       loading.value = false;
-      Utils.snackBar(
-        error.toString(),
-        "Request is not Submitted Successfully ",
-        action: "error",
-      );
+      print(error.toString());
     });
   }
 }

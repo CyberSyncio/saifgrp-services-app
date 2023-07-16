@@ -58,24 +58,32 @@ class RequestScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 Form(
                   key: _formKey,
-                  child: TextFormField(
-                    controller:
-                        _complaintController.descriptionController.value,
-                    focusNode: _complaintController.descriptionFocusNode.value,
-                    maxLines: 20,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Missing the text field";
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      // border: InputBorder.none,
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.all(16),
-
-                      hintText:
-                          'Electrical malfunction in the house: Need a qualified electrician to inspect and fix the wiring issue',
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: AppColor.kbackGroundColor,
+                        width: 1,
+                      ),
+                    ),
+                    child: TextFormField(
+                      controller:
+                          _complaintController.descriptionController.value,
+                      focusNode:
+                          _complaintController.descriptionFocusNode.value,
+                      maxLines: 20,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return Utils.snackBar("Missing",
+                              "Fields must not be empty", action: "error");
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(16),
+                        hintText: 'Electrical malfunction in the house: Need a qualified electrician to inspect and fix the wiring issue',
+                      ),
                     ),
                   ),
                 ),
@@ -91,7 +99,8 @@ class RequestScreen extends StatelessWidget {
                               _complaintController.descriptionController.value
                                   .clear();
                             } else {
-                              const Text("");
+                              Utils.snackBar(
+                                  'Request ', 'Kindly Enter Description');
                             }
                           },
                   ),

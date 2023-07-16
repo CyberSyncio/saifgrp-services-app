@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saif_app/repository/forget_password_repository/forget_passsword_repository.dart';
@@ -21,11 +23,19 @@ class ForgetPasswordController extends GetxController {
     };
     _api.forgetPasswordApi(data).then((value) {
       loading.value = false;
-      Utils.snackBar("Success", "Password reset e-mail has been sent to your account", action: "success");
+      Utils.snackBar(
+          "Success", "Password reset e-mail has been sent to your account",
+          action: "success");
     }).onError((error, stackTrace) {
-      print(error.toString());
+      var errorr = jsonDecode(error.toString());
       loading.value = false;
-      Utils.snackBar("Error", error.toString());
+      print(errorr);
+      Utils.snackBar(
+          "Error",
+          emailController.value.text.isEmpty
+              ? "Email : " + errorr['email'][0]
+              : errorr['email'][0],
+          action: 'error');
     });
   }
 }

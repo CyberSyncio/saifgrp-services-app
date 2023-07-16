@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saif_app/repository/login_repository/login_repo.dart';
@@ -28,7 +30,6 @@ class LoginController extends GetxController {
   }
 
   loginApi() {
-
     loading.value = true;
     update();
 
@@ -46,14 +47,20 @@ class LoginController extends GetxController {
       passwordController.value.clear();
       loading.value = false;
       update();
-
     }).onError((error, stackTrace) {
+      print(error.toString());
+      var errorr = jsonDecode(error.toString());
 
       passwordController.value.clear();
-      Utils.snackBar("Error", error.toString(), action: "error");
+
+      Utils.snackBar(
+          "Error",
+          emailController.value.text.isEmail
+              ? errorr['non_field_errors'][0]
+              : errorr['email'][0],
+          action: "error");
       loading.value = false;
       update();
-
     });
   }
 }
