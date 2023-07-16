@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:saif_app/views/home_screens/Request/history.dart';
 import 'package:saif_app/views/home_screens/Request/request_screen.dart';
-import 'package:saif_app/views/home_screens/drawer_screen/aboutus_screen.dart';
 import 'package:saif_app/views/home_screens/drawer_screen/change_password_screen.dart';
 import 'package:saif_app/views/auth/forget_password_screen.dart';
 import 'package:saif_app/views/auth/login.dart';
@@ -47,10 +45,6 @@ class AppRoutes {
           page: () => const ServiceScreen(),
         ),
         GetPage(
-          name: RoutesName.historyScreen,
-          page: () => const History(),
-        ),
-        GetPage(
           name: RoutesName.reqdashboardScreen,
           page: () => RequestScreen(),
         ),
@@ -61,10 +55,6 @@ class AppRoutes {
         GetPage(
           name: RoutesName.faqScreen,
           page: () => const FaqScreen(),
-        ),
-        GetPage(
-          name: RoutesName.aboutScreen,
-          page: () => const AboutScreen(),
         ),
         GetPage(
           name: RoutesName.complainScreen,

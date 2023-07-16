@@ -2,15 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:saif_app/resources/colors/app_colors.dart';
 import 'package:saif_app/views/home_screens/drawer_screen/complaint_screen.dart';
 import 'package:saif_app/views/home_screens/home_screen.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../view_models/controller/request_controller/request_history_controller.dart';
 import '../home_screens/services.dart';
-import '../../resources/assets/app_image.dart';
-import '../../resources/colors/app_colors.dart';
-import '../../resources/routes/routes_name.dart';
 
 class HomeMainScreen extends StatefulWidget {
   const HomeMainScreen({Key? key}) : super(key: key);
@@ -134,4 +132,3 @@ class _HomeMainScreenState extends State<HomeMainScreen>
     );
   }
 }
-

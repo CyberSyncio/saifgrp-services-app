@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.saifgroupservices">
    <application
-        android:label="saifgroupservices"
+        android:label="SG Services"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

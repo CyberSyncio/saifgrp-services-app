@@ -23,5 +23,6 @@ class AppImages {
   static const String building4 = "assets/images/pic4.jpg";
   static const String building5 = "assets/images/pic5.jpg";
   static const String icon = "assets/images/icon.png";
+  static const String nodata = "assets/images/nodata.gif";
   static const String person = "assets/images/person.jpg";
 }

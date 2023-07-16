@@ -36,14 +36,18 @@ class RequestController extends GetxController {
     var response = await _api.requestApi(data, _header).then((value) {
       loading.value = false;
       print(value);
-      Utils.snackBar("Request", "Request is Sent Successfully");
+      Utils.snackBar("Request", "Request is Sent Successfully",
+          action: "success");
 
       // Clear the text after successful request
       descriptionController.value.clear();
     }).onError((error, stackTrace) {
       loading.value = false;
       Utils.snackBar(
-          "", "Request is not Submitted Successfully Please Try Again later");
+        error.toString(),
+        "Request is not Submitted Successfully ",
+        action: "error",
+      );
     });
   }
 }
