@@ -70,30 +70,34 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: MediaQuery.of(context).size.width * 1,
                       color: AppColor.kbackGroundColor,
                       padding: const EdgeInsets.only(left: 8, top: 8),
-                      child: InkWell(
-                        onTap: () => Scaffold.of(context).openDrawer(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 7),
-                              child: Text(
-                                "Saif Group",
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 18.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1,
-                                ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 7),
+                            child: Text(
+                              "Saif Group",
+                              style: GoogleFonts.montserrat(
+                                fontSize: 18.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 1,
                               ),
                             ),
-                            const SizedBox(width: 12),
-                            const Padding(
+                          ),
+                          const SizedBox(width: 12),
+                          InkWell(
+                            onTap: () => Scaffold.of(context).openDrawer(),
+                            child: const Padding(
                               padding: EdgeInsets.only(right: 10),
-                              child: Icon(Icons.menu, size: 40, color: Colors.white,),
-                            )
-                          ],
-                        ),
+                              child: Icon(
+                                Icons.menu,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   );
@@ -150,13 +154,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
+                          SizedBox(
+                            height: height * 0.050,
                           ),
                           GestureDetector(
                             onTap: () => Get.toNamed(RoutesName.serviceScreen),
                             child: Container(
-                              height: height * .045,
+                              height: height * .049,
                               width: width * .5,
                               alignment: Alignment.center,
                               margin: const EdgeInsets.only(left: 12),

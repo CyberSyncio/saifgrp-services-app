@@ -20,12 +20,11 @@ class NetworkApiService extends BaseApiServices {
     }
     dynamic responseJson;
     try {
-      final response = await http
-          .get(
-            Uri.parse(url),
-            headers: header,
-          )
-          .timeout(const Duration(seconds: 15));
+      final response = await http.get(
+        Uri.parse(url),
+        headers: header,
+      );
+
       responseJson = returnResponseJson(response);
     } on SocketException {
       throw InternetException();
@@ -47,9 +46,9 @@ class NetworkApiService extends BaseApiServices {
     }
     dynamic responseJson;
     try {
-      final response = await http
-          .post(Uri.parse(url), headers: header, body: data)
-          .timeout(const Duration(seconds: 10));
+      final response =
+          await http.post(Uri.parse(url), headers: header, body: data);
+
       print('response for put api is ${response.statusCode}');
 
       responseJson = returnResponseJson(response);
