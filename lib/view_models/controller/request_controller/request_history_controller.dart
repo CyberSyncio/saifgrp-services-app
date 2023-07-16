@@ -5,8 +5,9 @@ import '../store user session/store_user_data.dart';
 
 class RequestHistoryController extends GetxController {
   final _requestHistory = RequestHistoryRepository();
-  List requestList = [].obs;
+  List<dynamic> requestList = <dynamic>[].obs;
   RxBool isLoading = true.obs;
+  RxBool isRefresh = true.obs;
   final StoreUserData _userToken = Get.put(StoreUserData());
   Map<String, String> _header = {};
   String _token = '';
@@ -14,15 +15,23 @@ class RequestHistoryController extends GetxController {
   @override
   void onInit() async {
     _token = await _userToken.getToken();
-    print('value of token inside Request Init Method $_token');
+    print('Value of token inside Request Init Method: $_token');
     _header = {'authorization': 'Token $_token'};
     await getRequestHistory();
     super.onInit();
   }
 
-  getRequestHistory() async {
-    requestList = await _requestHistory.requestHistory(_header);
+  Future<void> getRequestHistory({bool reload = false}) async {
+    if (reload) {
+      isRefresh.value = true;
+      requestList.clear();
+    }
+
+    requestList.addAll(await _requestHistory.requestHistory(_header));
+
     isLoading.value = false;
+    isRefresh.value = false;
+
     print(requestList);
     update();
   }

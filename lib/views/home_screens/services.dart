@@ -32,6 +32,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
             'Services',
             style: GoogleFonts.montserrat(

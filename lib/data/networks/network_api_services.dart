@@ -20,11 +20,12 @@ class NetworkApiService extends BaseApiServices {
     }
     dynamic responseJson;
     try {
-      final response = await http.get(
-        Uri.parse(url),
-        headers: header,
-      );
-
+      final response = await http
+          .get(
+            Uri.parse(url),
+            headers: header,
+          )
+          .timeout(const Duration(seconds: 15));
       responseJson = returnResponseJson(response);
     } on SocketException {
       throw InternetException();
@@ -37,7 +38,7 @@ class NetworkApiService extends BaseApiServices {
 
 //*..................................POST API...................................
   @override
-  Future postApi(
+  Future  postApi(
       {required dynamic data,
       Map<String, String>? header,
       required String url}) async {
@@ -46,9 +47,9 @@ class NetworkApiService extends BaseApiServices {
     }
     dynamic responseJson;
     try {
-      final response =
-          await http.post(Uri.parse(url), headers: header, body: data);
-
+      final response = await http
+          .post(Uri.parse(url), headers: header, body: data)
+          .timeout(const Duration(seconds: 10));
       print('response for put api is ${response.statusCode}');
 
       responseJson = returnResponseJson(response);

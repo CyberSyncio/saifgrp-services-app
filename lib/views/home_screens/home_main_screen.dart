@@ -1,14 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:saif_app/resources/colors/app_colors.dart';
-import 'package:saif_app/views/home_screens/drawer_screen/complaint_screen.dart';
+import 'package:saif_app/views/home_screens/drawer_screen/request_history_screen.dart';
 import 'package:saif_app/views/home_screens/home_screen.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import '../../view_models/controller/request_controller/request_history_controller.dart';
 import '../home_screens/services.dart';
+import '../../resources/colors/app_colors.dart';
 
 class HomeMainScreen extends StatefulWidget {
   const HomeMainScreen({Key? key}) : super(key: key);
@@ -69,7 +67,7 @@ class _HomeMainScreenState extends State<HomeMainScreen>
     return [
       const HomeScreen(),
       const ServiceScreen(),
-      const ComplaintScreen(),
+      const RequestHistoryScreen(),
     ];
   }
 
@@ -95,14 +93,6 @@ class _HomeMainScreenState extends State<HomeMainScreen>
           controller: _controller,
           screens: _buildScreens(),
           items: _navBarsItems(),
-          onItemSelected: (value) {
-            if (value == 2) {
-              RequestHistoryController requestHistoryController =
-                  Get.put(RequestHistoryController());
-
-              requestHistoryController.getRequestHistory();
-            }
-          },
           confineInSafeArea: true,
           neumorphicProperties: const NeumorphicProperties(),
           backgroundColor: const Color.fromARGB(255, 45, 151, 209),
@@ -119,7 +109,7 @@ class _HomeMainScreenState extends State<HomeMainScreen>
           popActionScreens: PopActionScreensType.all,
           itemAnimationProperties: const ItemAnimationProperties(
             duration: Duration(milliseconds: 200),
-            curve: Curves.bounceInOut,
+            curve: Curves.easeInCirc,
           ),
           screenTransitionAnimation: const ScreenTransitionAnimation(
             animateTabTransition: true,
