@@ -46,13 +46,11 @@ class Utils {
 class CustomButton extends StatelessWidget {
   final String title;
   final void Function()? onPressed;
-  final bool loading;
   final TextStyle textStyle;
 
   const CustomButton({
     Key? key,
     required this.title,
-    this.loading = false,
     required this.onPressed,
     this.textStyle = const TextStyle(
       fontSize: 18.0,

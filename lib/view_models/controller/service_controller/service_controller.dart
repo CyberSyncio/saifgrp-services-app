@@ -16,7 +16,7 @@ class ServicesController extends GetxController {
     serviceListModel = await _servicesRepo.getServices();
     isRefresh = false.obs;
     isLoading = false.obs;
-    print(serviceListModel);
+    (serviceListModel);
     update();
   }
 }

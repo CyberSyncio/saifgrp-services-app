@@ -12,16 +12,15 @@ class RequestController extends GetxController {
   Map<String, String>? _header;
   String? _token;
   final _api = RequestRepository();
-  final StoreUserData _userData = Get.put(StoreUserData());
   dynamic argumentData = Get.arguments;
   String buildingId = '';
   @override
   void onInit() async {
     _token = await _userToken.getToken();
-    print('token inside request controller is $_token');
+    ('token inside request controller is $_token');
     buildingId = await _userToken.getBuildingId();
     _header = {'authorization': 'Token $_token'};
-    print(buildingId);
+    (buildingId);
     super.onInit();
   }
 
@@ -33,9 +32,9 @@ class RequestController extends GetxController {
       "description": descriptionController.value.text,
     };
 
-    var response = await _api.requestApi(data, _header).then((value) {
+    await _api.requestApi(data, _header).then((value) {
       loading.value = false;
-      print(value);
+      (value);
       Utils.snackBar("Request", "Request is Sent Successfully",
           action: 'success');
 
@@ -43,7 +42,7 @@ class RequestController extends GetxController {
       descriptionController.value.clear();
     }).onError((error, stackTrace) {
       loading.value = false;
-      print(error.toString());
+      (error.toString());
     });
   }
 }

@@ -12,14 +12,11 @@ class RequestHistoryScreen extends StatefulWidget {
 }
 
 class _RequestHistoryScreenState extends State<RequestHistoryScreen> {
-  Future<void> _loadData(bool reload) async {
-    await Get.find<RequestHistoryController>()
-        .getRequestHistory(reload: reload);
-  }
+
 
   @override
   void initState() {
-    _loadData(true);
+    Get.put(RequestHistoryController());
     super.initState();
   }
 
@@ -62,7 +59,7 @@ class _RequestHistoryScreenState extends State<RequestHistoryScreen> {
                           ),
                         )
                       : RefreshIndicator(
-                          onRefresh: () => _loadData(true),
+                          onRefresh: () => controller.getRequestHistory(),
                           child: ListView.builder(
                             itemCount: controller.requestList.length,
                             itemBuilder: (context, index) {

@@ -6,7 +6,7 @@ class RegisterRepository {
   Future<dynamic> registerApi(var data) {
     dynamic response =
         _apiServices.postApi(data: data, url: AppUrl.registerUrl);
-    print(response.toString());
+  
     return response;
   }
 }

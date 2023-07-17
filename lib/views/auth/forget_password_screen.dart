@@ -6,6 +6,7 @@ import 'package:saif_app/view_models/controller/forget_password_controller/forge
 import '../../resources/colors/app_colors.dart';
 import '../../utils/utils.dart';
 
+// ignore: must_be_immutable
 class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({super.key});
   ForgetPasswordController forgetPasswordController =

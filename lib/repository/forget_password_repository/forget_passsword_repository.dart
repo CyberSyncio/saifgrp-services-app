@@ -5,7 +5,7 @@ class ForgetPasswordRepository {
   final _apiServices = NetworkApiService();
   Future<dynamic> forgetPasswordApi(var data) {
     dynamic response = _apiServices.postApi(data: data, url: AppUrl.forgetUrl);
-    print(response.toString());
+   
     return response;
   }
 }

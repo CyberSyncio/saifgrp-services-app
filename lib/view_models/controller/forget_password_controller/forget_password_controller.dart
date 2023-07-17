@@ -29,10 +29,11 @@ class ForgetPasswordController extends GetxController {
     }).onError((error, stackTrace) {
       var errorr = jsonDecode(error.toString());
       loading.value = false;
-      print(errorr);
+      (errorr);
       Utils.snackBar(
           "Error",
           emailController.value.text.isEmpty
+              // ignore: prefer_interpolation_to_compose_strings
               ? "Email : " + errorr['email'][0]
               : errorr['email'][0],
           action: 'error');

@@ -160,7 +160,8 @@ class Login extends StatelessWidget {
                                       loginController
                                           .passwordController.value.text.isEmpty
                                   ? Utils.snackBar('Login',
-                                      "email and password is required to login", action: "error")
+                                      "email and password is required to login",
+                                      action: "error")
                                   : loginController.loginApi();
                             }
                           },

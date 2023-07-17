@@ -24,7 +24,7 @@ class UpdateProfileController extends GetxController {
 
   @override
   void onInit() async {
-    print('controller is created');
+    ('controller is created');
     _token = await _userToken.getToken();
     _header = {'authorization': 'Token $_token'};
     await getUserDetailApi();
@@ -36,7 +36,7 @@ class UpdateProfileController extends GetxController {
     userNameController.value.clear();
     firstNameController.value.clear();
     lastNameController.value.clear();
-    print('data is cleared');
+    ('data is cleared');
   }
 
   getUserDetailApi() {
@@ -64,7 +64,7 @@ class UpdateProfileController extends GetxController {
       loading.value = false;
       _userData = value;
 
-      print(value);
+      (value);
       Utils.snackBar("Profile Update", "Profile updated successfully",
           action: 'success');
     }).onError((error, stackTrace) {

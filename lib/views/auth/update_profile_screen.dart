@@ -9,7 +9,6 @@ import 'package:saif_app/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:saif_app/view_models/controller/update_profile_controller/update_profile_controller.dart';
 import 'dart:io';
-import '../../resources/assets/app_image.dart';
 // import '../../view_models/controller/login controller/login_view_model.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -20,14 +19,13 @@ class UpdateProfileScreen extends StatefulWidget {
 }
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
-  UpdateProfileController updateprofileController =
+  var updateprofileController =
       Get.put(UpdateProfileController());
   final _formKey = GlobalKey<FormState>();
   File? image;
 
   @override
   void initState() {
-    UpdateProfileController updateprofileController =
         Get.put(UpdateProfileController());
     super.initState();
   }
@@ -39,14 +37,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       final imageTemp = File(image.path);
       setState(() => this.image = imageTemp);
     } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+      ('Failed to pick image: $e');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -107,7 +103,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     GoogleFonts.montserrat(color: Colors.black),
                                 focusNode: controller.userNameFocusNode.value,
                                 controller: controller.userNameController.value,
-
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
@@ -131,7 +126,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            //TODO Login password
                             TextFormField(
                               style: GoogleFonts.montserrat(
                                   color: AppColor.blackColor),
@@ -163,7 +157,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               height: 10,
                             ),
                             TextFormField(
-
                               focusNode: controller.lastNameFocusNode.value,
                               controller: controller.lastNameController.value,
 
@@ -211,8 +204,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             if (_formKey.currentState!.validate()) {
                               updateprofileController.updateProfileApi();
                             } else {
-                              Utils.snackBar('Missing',
-                                  'Please fill all the fields', action: 'error');
+                              Utils.snackBar(
+                                  'Missing', 'Please fill all the fields',
+                                  action: 'error');
                             }
                           },
                     // isLoading: loginController.loading.value,

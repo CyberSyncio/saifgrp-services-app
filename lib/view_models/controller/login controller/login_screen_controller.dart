@@ -48,7 +48,7 @@ class LoginController extends GetxController {
       loading.value = false;
       update();
     }).onError((error, stackTrace) {
-      print(error.toString());
+      (error.toString());
       var errorr = jsonDecode(error.toString());
 
       passwordController.value.clear();
