@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
         title: 'Saif App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            textTheme: GoogleFonts.firaSansTextTheme(),
+            fontFamily: "geometric sans-serif typeface",
+            textTheme:
+                GoogleFonts.openSansTextTheme(Theme.of(context).textTheme),
             // colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
             useMaterial3: true,
             visualDensity: VisualDensity.adaptivePlatformDensity),
