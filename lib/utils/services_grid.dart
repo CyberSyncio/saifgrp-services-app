@@ -17,7 +17,7 @@ Widget serviceGrid({
     },
     onTap: () =>
         Get.toNamed(RoutesName.reqdashboardScreen, arguments: serviceId),
-    child: Container(
+    child: SizedBox(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

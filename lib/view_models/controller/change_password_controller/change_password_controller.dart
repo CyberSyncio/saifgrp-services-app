@@ -19,8 +19,6 @@ class ChangePasswordController extends GetxController {
   String? _token;
 
   final _api = ChangePasswordRepository();
-  final StoreUserData _userData = Get.put(StoreUserData());
-
   @override
   void onInit() async {
     _token = await _userToken.getToken();
@@ -39,10 +37,7 @@ class ChangePasswordController extends GetxController {
           action: "error");
       loading.value = false;
     } else {
-      var data = {
-        "new_password1": newPassword1,
-        "new_password2": newPassword2
-      };
+      var data = {"new_password1": newPassword1, "new_password2": newPassword2};
 
       try {
         var response = await _api.changePasswordApi(_header, data);
@@ -59,7 +54,7 @@ class ChangePasswordController extends GetxController {
         }
       } catch (error) {
         loading.value = false;
-        print(error);
+        (error);
         Utils.snackBar("Error", "Failed to update password: $error",
             action: "error");
       }

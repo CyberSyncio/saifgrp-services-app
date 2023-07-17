@@ -12,10 +12,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SplashServices splashServices = Get.put(SplashServices());
-
   @override
   void initState() {
+    Get.put(SplashServices());
     super.initState();
   }
 

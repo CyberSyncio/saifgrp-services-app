@@ -82,6 +82,7 @@ class FaqItem extends StatefulWidget {
   const FaqItem({super.key, required this.question, required this.answer});
 
   @override
+  // ignore: library_private_types_in_public_api
   _FaqItemState createState() => _FaqItemState();
 }
 

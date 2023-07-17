@@ -7,7 +7,7 @@ class ChangePasswordRepository {
   Future<dynamic> changePasswordApi(var header, var data) {
     dynamic response = _apiServices.postApi(
         data: data, header: header, url: AppUrl.updateUrl.trim());
-    print(response.toString());
+  
     return response;
   }
 }

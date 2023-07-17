@@ -52,16 +52,15 @@ class RegisterController extends GetxController {
     for (int i = 0; i < buildingDetails.length; i++) {
       if (dropDownValue.value == buildingDetails[i]['name']) {
         buildingId.value = buildingDetails[i]['id'].toString();
-        //print(buildingDetails[i]['id'].toString());
+        // (buildingDetails[i]['id'].toString());
         await _userDataController
             .storeBuildingId(buildingDetails[i]['id'].toString());
       }
     }
-    print(_userDataController.buildingId.value);
+    (_userDataController.buildingId.value);
   }
 
   void registerApi() {
-    loading.value = true;
     var userName = emailController.value.text.split('@');
     var userName1 = userName[0];
     var data = {
@@ -72,43 +71,57 @@ class RegisterController extends GetxController {
       "building": buildingId.value
     };
 
-    _api.registerApi(data).then((value) {
-      loading.value = false;
-      Utils.snackBar("Registration ", "Sucessfully Registered",
-          action: "success");
-      emailController.value.clear();
-      passwordController.value.clear();
-      confirmPasswordController.value.clear();
-      // buildingId.value.clear();
-      Get.toNamed(RoutesName.loginScreen);
-    }).onError((error, stackTrace) {
-      loading.value = false;
-      var errorr = jsonDecode(error.toString());
+    if (buildingId.value.isEmpty) {
+      Utils.snackBar('Error', 'Kindly Select your Residential Building',
+          action: 'error');
+    } else {
+      _api.registerApi(data).then((value) {
+        loading.value = false;
+        Utils.snackBar("Registration ", "Successfully Registered",
+            action: "success");
+        emailController.value.clear();
+        passwordController.value.clear();
+        confirmPasswordController.value.clear();
+        // buildingId.value.clear();
+        Get.toNamed(RoutesName.loginScreen);
+      }).onError((error, stackTrace) {
+        loading.value = false;
+        var errorr = jsonDecode(error.toString());
 
-      print(error.toString());
-      Utils.snackBar(
-          "Error",
-          emailController.value.text.isEmail &&
-                  emailController.value.text.isEmpty
-              ? "${" Email: " + errorr['username'][0] + "\nPasssword: " + errorr['password'][0]} \nConfirm Password: " +
-                  errorr['password2'][0]
-              : emailController.value.text.isEmpty
-                  ? " Email: " + errorr['username'][0]
-                  : passwordController.value.text.isEmpty &&
-                          emailController.value.text.isEmpty
-                      ? "${"Email: " + errorr['username'][0]}\nPassword: " +
-                          errorr['password'][0]
-                      : confirmPasswordController.value.text.isEmpty &&
-                              emailController.value.text.isEmpty
-                          ? "${"Email: " + errorr['username'][0]}\nConfirm Password: " +
-                              errorr['password2'][0]
-                          : passwordController.value.text.isEmpty
-                              ? "${errorr['email'][0] + "\nPassword: " + errorr['password'][0]}"
-                              : confirmPasswordController.value.text.isEmpty
-                                  ? "${errorr['email'][0] + "\nConfirm Password: " + errorr['password2'][0]}"
-                                  : "${errorr['email'][0] + "\nPasssword: " + errorr['password'][0]} \nConfirm Password: " +
-                                      errorr['password2'][0],
-          action: "error");
-    });
+        (error.toString());
+        Utils.snackBar(
+            "Error",
+            emailController.value.text.isEmpty
+                // ignore: prefer_interpolation_to_compose_strings
+                ? "${" Email: " + errorr['username'][0] + "\nPassword: " + errorr['password'][0]} \nConfirm Password: " +
+                    errorr['password2'][0]
+                : passwordController.value.text.isEmpty &&
+                        emailController.value.text.isEmpty
+                    // ignore: prefer_interpolation_to_compose_strings
+                    ? "${"Email: " + errorr['username'][0]}\nPassword: " +
+                        errorr['password'][0]
+                    : confirmPasswordController.value.text.isEmpty &&
+                            emailController.value.text.isEmpty
+                        // ignore: prefer_interpolation_to_compose_strings
+                        ? "${"Email: " + errorr['username'][0]}\nConfirm Password: " +
+                            errorr['password2'][0]
+                        : passwordController.value.text.isEmpty &&
+                                confirmPasswordController.value.text.isEmpty
+                            // ignore: prefer_interpolation_to_compose_strings
+                            ? "${"Password: " + errorr['password'][0]}\nConfirm Password: " +
+                                errorr['password2'][0]
+                            : passwordController.value.text.isEmpty
+                                // ignore: prefer_interpolation_to_compose_strings
+                                ? "Password: " + errorr['password'][0]
+                                : confirmPasswordController.value.text.isEmpty
+                                    // ignore: prefer_interpolation_to_compose_strings
+                                    ? "Confirm Password: " +
+                                        errorr['password2'][0]
+                                    // ignore: prefer_interpolation_to_compose_strings
+                                    : "${errorr['email'][0] + "\nPassword: " + errorr['password'][0]} \nConfirm Password: " +
+                                        errorr['password2'][0],
+            action: "error");
+      });
+    }
   }
 }

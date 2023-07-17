@@ -33,7 +33,7 @@ class StoreUserData extends GetxController {
     await _preferences!.setString('token', userToken);
     isLoggedIn.value = true;
     token.value = userToken;
-    print('token value is ${token.value}');
+    ('token value is ${token.value}');
 
     update();
   }

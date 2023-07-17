@@ -17,13 +17,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<void> _loadData(bool reload) async {
-    await Get.find<BuildingController>().getBuilding();
-  }
+  
 
   @override
   void initState() {
-    _loadData(true);
+    Get.put(BuildingController());
+    
     super.initState();
   }
 
@@ -40,213 +39,218 @@ class _HomeScreenState extends State<HomeScreen> {
           surfaceTintColor: AppColor.blackColor,
           child: sliderView(context),
         ),
-        body: RefreshIndicator(
-          edgeOffset: 10,
-          displacement: 200,
-          strokeWidth: 2,
-          color: AppColor.kPrimaryColor,
-          backgroundColor: AppColor.kWhiteColor,
-          onRefresh: () => _loadData(true),
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Builder(builder: (context) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      height: 60,
-                      width: MediaQuery.of(context).size.width * 1,
-                      color: AppColor.kbackGroundColor,
-                      padding: const EdgeInsets.only(left: 8, top: 8),
-                      child: InkWell(
-                        onTap: () => Scaffold.of(context).openDrawer(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 7),
-                              child: Text(
-                                "Saif Group",
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 18.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1,
-                                ),
-                              ),
+        body: GetBuilder<BuildingController>(
+          init: BuildingController(),
+          builder: (controller) {
+            return RefreshIndicator(
+              edgeOffset: 10,
+              displacement: 200,
+              strokeWidth: 2,
+              color: AppColor.kPrimaryColor,
+              backgroundColor: AppColor.kWhiteColor,
+              onRefresh: () => controller.getBuilding(),
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Builder(builder: (context) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
                             ),
-                            const SizedBox(width: 12),
-                            const Padding(
-                              padding: EdgeInsets.only(right: 10),
-                              child: Icon(
-                                Icons.menu,
-                                size: 40,
-                                color: Colors.white,
-                              ),
-                            )
                           ],
                         ),
-                      ),
-                    ),
-                  );
-                }),
-                SizedBox(height: height * 0.020),
-                Container(
-                  height: height * .18,
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: getBorderRadiusWidget(context, 0.02),
-                    color: const Color.fromARGB(255, 45, 151, 209),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        spreadRadius: 3,
-                        blurRadius: 8,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        width: 0,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0, top: 10),
-                            child: Text(
-                              "Welcome To Saif Group",
-                              textAlign: TextAlign.justify,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 18.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              "Higher Quality Of Living",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                letterSpacing: 1,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: height * 0.035,
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.toNamed(RoutesName.serviceScreen),
-                            child: Container(
-                              height: height * .045,
-                              width: width * .5,
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.only(left: 12),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.6),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 3),
+                        child: Container(
+                          alignment: Alignment.topLeft,
+                          height: 60,
+                          width: MediaQuery.of(context).size.width * 1,
+                          color: AppColor.kbackGroundColor,
+                          padding: const EdgeInsets.only(left: 8, top: 8),
+                          child: InkWell(
+                            onTap: () => Scaffold.of(context).openDrawer(),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 7),
+                                  child: Text(
+                                    "Saif Group",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 18.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w800,
+                                      letterSpacing: 1,
+                                    ),
                                   ),
-                                ],
-                              ),
-                              child: Text(
-                                "Services",
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 1,
                                 ),
-                              ),
+                                const SizedBox(width: 12),
+                                const Padding(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: Icon(
+                                    Icons.menu,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
                             ),
+                          ),
+                        ),
+                      );
+                    }),
+                    SizedBox(height: height * 0.020),
+                    Container(
+                      height: height * .18,
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: getBorderRadiusWidget(context, 0.02),
+                        color: const Color.fromARGB(255, 45, 151, 209),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            spreadRadius: 3,
+                            blurRadius: 8,
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: height * 0.033),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    'Apartments',
-                    style: GoogleFonts.montserrat(
-                      color: Colors.black,
-                      fontSize: 18,
-                      letterSpacing: 1,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                SizedBox(height: height * 0.02),
-                Center(
-                  child: GetBuilder<BuildingController>(
-                    init: BuildingController(),
-                    builder: (controller) {
-                      return Container(
-                        alignment: Alignment.center,
-                        width: controller.isLoading == true
-                            ? width * .2
-                            : width * 1,
-                        height: controller.isLoading == true
-                            ? height * 0.2
-                            : height * 0.45,
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        child: controller.isLoading == true
-                            ? const Center(child: CircularProgressIndicator())
-                            : ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: controller.buildingModel.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return HousesWidget(
-                                    imageName: controller.buildingModel[index]
-                                        ["image"],
-                                    title1: controller.buildingModel[index]
-                                        ['name'],
-                                    title2: controller.buildingModel[index]
-                                        ['description'],
-                                    city: controller.buildingModel[index]
-                                            ["city"]
-                                        .toString(),
-                                  );
-                                },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            width: 0,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0, top: 10),
+                                child: Text(
+                                  "Welcome To Saif Group",
+                                  textAlign: TextAlign.justify,
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 18.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
                               ),
-                      );
-                    },
-                  ),
+                              const SizedBox(
+                                height: 0,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Text(
+                                  "Higher Quality Of Living",
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: height * 0.035,
+                              ),
+                              GestureDetector(
+                                onTap: () => Get.toNamed(RoutesName.serviceScreen),
+                                child: Container(
+                                  height: height * .045,
+                                  width: width * .5,
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.only(left: 12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.6),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    "Services",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 20.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: height * 0.033),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Apartments',
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 18,
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: height * 0.02),
+                    Center(
+                      child: GetBuilder<BuildingController>(
+                        init: BuildingController(),
+                        builder: (controller) {
+                          return Container(
+                            alignment: Alignment.center,
+                            width: controller.isLoading.value == true
+                                ? width * .2
+                                : width * 1,
+                            height: controller.isLoading.value == true
+                                ? height * 0.2
+                                : height * 0.45,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: controller.isLoading.value == true
+                                ? const Center(child: CircularProgressIndicator())
+                                : ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: controller.buildingModel.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return HousesWidget(
+                                        imageName: controller.buildingModel[index]
+                                            ["image"],
+                                        title1: controller.buildingModel[index]
+                                            ['name'],
+                                        title2: controller.buildingModel[index]
+                                            ['description'],
+                                        city: controller.buildingModel[index]
+                                                ["city"]
+                                            .toString(),
+                                      );
+                                    },
+                                  ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          }
         ),
       ),
     );

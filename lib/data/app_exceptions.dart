@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 class AppExceptions implements Exception {
   final String? _message;
   final String? _prefix;
@@ -13,8 +15,8 @@ class InternetException extends AppExceptions {
   InternetException([String? message]) : super(message, "No Internet");
 }
 
-class RequestTimout extends AppExceptions {
-  RequestTimout([String? message]) : super(message, "Request Time Out");
+class RequestTimeout extends AppExceptions {
+  RequestTimeout([String? message]) : super(message, "Request Time Out");
 }
 
 class ServerException extends AppExceptions {

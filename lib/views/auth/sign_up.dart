@@ -87,7 +87,6 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        //TODO Login password
                         TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {}
@@ -193,11 +192,9 @@ class _RegisterState extends State<Register> {
                         )
                       ],
                     )),
-
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height * .020,
                 ),
-
                 Obx(
                   () => CustomButton(
                     title: "Register",
@@ -210,18 +207,17 @@ class _RegisterState extends State<Register> {
                     onPressed: registerController.loading.value
                         ? null
                         : () {
-                            registerController.getBuildingId();
-                            registerController.registerApi();
-
+                            if (_formKey.currentState!.validate()) {
+                              
+                              registerController.getBuildingId();
+                              registerController.registerApi();
+                            }
                           },
                   ),
                 ),
-
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height * .012,
                 ),
-
-                //TODO sign up text
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
