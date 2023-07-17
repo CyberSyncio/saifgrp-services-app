@@ -103,7 +103,6 @@ class _HomeScreenState extends State<HomeScreen> {
               }),
               // SizedBox(height: height * 0.020),
               Container(
-                height: height * .17,
                 // padding: const EdgeInsets.all(15),
                 // margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -121,34 +120,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SizedBox(width: width * 0.025),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Hey Ikran Khan,",
-                              // textAlign: TextAlign.justify,
-                              style: GoogleFonts.openSans(
-                                fontSize: 20.0,
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 50, top: 20),
+                      child: Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'My Profile',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w800,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: height * 0.008,
-                            ),
-                            Text(
-                              "Empowering Success through \nInnovation and Expertise",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 16.0,
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                // fontWeight: FontWeight.w800,
-                                // letterSpacing: 1,
+                              SizedBox(
+                                height: height * 0.008,
                               ),
-                            ),
-                          ],
+                              const Text(
+                                'Welcome To Saif group services',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
