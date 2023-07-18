@@ -12,8 +12,6 @@ class RequestHistoryScreen extends StatefulWidget {
 }
 
 class _RequestHistoryScreenState extends State<RequestHistoryScreen> {
-
-
   @override
   void initState() {
     Get.put(RequestHistoryController());
@@ -24,18 +22,6 @@ class _RequestHistoryScreenState extends State<RequestHistoryScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Your Complaints',
-            style: GoogleFonts.montserrat(
-              fontWeight: FontWeight.w600,
-              fontSize: 24,
-              color: AppColor.kWhiteColor,
-            ),
-          ),
-          backgroundColor: AppColor.kbackGroundColor,
-          centerTitle: true,
-        ),
         body: Container(
           color: AppColor.kWhiteColor,
           child: GetBuilder<RequestHistoryController>(
@@ -90,9 +76,17 @@ class _RequestHistoryScreenState extends State<RequestHistoryScreen> {
                                         ),
                                       ),
                                     ),
-                                    trailing: const Icon(
+                                    trailing: Icon(
                                       Icons.verified_outlined,
-                                      color: Colors.black54,
+                                      color: controller.requestList[index]
+                                                  ['status'] ==
+                                              'approved'
+                                          ? Colors.green
+                                          : controller.requestList[index]
+                                                      ['status'] ==
+                                                  'pending'
+                                              ? Colors.yellow
+                                              : Colors.black54,
                                       size: 29,
                                     ),
                                   ),
