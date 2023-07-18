@@ -5,6 +5,28 @@ import 'package:saif_app/resources/colors/app_colors.dart';
 
 // ......................FOCUS CHANGE..............................
 class Utils {
+  static final kBottomNavigationBar = [
+    const BottomNavigationBarItem(
+      icon: Icon(
+        Icons.home_outlined,
+      ),
+      label: 'Resedent',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(
+        Icons.show_chart_rounded,
+        size: 40,
+      ),
+      label: 'Services',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(
+        Icons.history_outlined,
+      ),
+      label: 'History',
+    ),
+  ];
+
   static void feildFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();

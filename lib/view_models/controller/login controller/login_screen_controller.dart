@@ -51,7 +51,7 @@ class LoginController extends GetxController {
       (error.toString());
       var errorr = jsonDecode(error.toString());
 
-      passwordController.value.clear();
+      // passwordController.value.clear();
 
       Utils.snackBar(
           "Error",

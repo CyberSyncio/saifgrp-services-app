@@ -82,13 +82,15 @@ class RegisterController extends GetxController {
         emailController.value.clear();
         passwordController.value.clear();
         confirmPasswordController.value.clear();
+        dropDownValue.value = 'select your Residential';
         // buildingId.value.clear();
         Get.toNamed(RoutesName.loginScreen);
       }).onError((error, stackTrace) {
         loading.value = false;
         var errorr = jsonDecode(error.toString());
 
-        (error.toString());
+        print(errorr);
+
         Utils.snackBar(
             "Error",
             emailController.value.text.isEmpty
@@ -118,8 +120,7 @@ class RegisterController extends GetxController {
                                     ? "Confirm Password: " +
                                         errorr['password2'][0]
                                     // ignore: prefer_interpolation_to_compose_strings
-                                    : "${errorr['email'][0] + "\nPassword: " + errorr['password'][0]} \nConfirm Password: " +
-                                        errorr['password2'][0],
+                                    : "${errorr['email'][0]}",
             action: "error");
       });
     }

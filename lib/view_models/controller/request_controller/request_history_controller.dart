@@ -5,7 +5,7 @@ import '../store user session/store_user_data.dart';
 
 class RequestHistoryController extends GetxController {
   final _requestHistory = RequestHistoryRepository();
-   List requestList = [].obs;
+  List requestList = [].obs;
   RxBool isLoading = true.obs;
   RxBool isRefresh = true.obs;
   final StoreUserData _userToken = Get.put(StoreUserData());
@@ -19,12 +19,14 @@ class RequestHistoryController extends GetxController {
     await getRequestHistory();
     super.onInit();
   }
+
   Future<void> getRequestHistory({bool reload = false}) async {
     if (reload) {
       isRefresh.value = true;
       requestList.clear();
     }
     requestList = await _requestHistory.requestHistory(_header);
+    print(requestList);
     isLoading.value = false;
     isRefresh.value = false;
     update();
