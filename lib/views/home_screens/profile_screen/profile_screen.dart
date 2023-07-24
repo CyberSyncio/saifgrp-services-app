@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapp/utils/routes/routes_name.dart';
 import 'package:myapp/view_model/controller/update_profile_controller/update_profile_controller.dart';
+import 'package:myapp/view_model/controller/user_session_controller/store_user_data.dart';
 import 'package:myapp/views/home_screens/profile_screen/profile_screen_component/profile_form_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../../utils/utils.dart';
@@ -13,6 +15,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final StoreUserData sessionController = Get.find();
   @override
   void initState() {
     super.initState();
@@ -118,7 +121,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                               ),
                             ),
-                            SizedBox(height: 30 * fem),
+                            SizedBox(height: 22 * fem),
+                            Row(
+                              children: [
+                                const SizedBox(width: 28),
+                                GestureDetector(
+                                  onTap: () => Get.toNamed(
+                                    RoutesName.changPasswordScreen,
+                                  ),
+                                  child: Text(
+                                    'Change Password',
+                                    style: SafeGoogleFont(
+                                      'montserrat',
+                                      fontSize: 18 * ffem,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.2125 * ffem / fem,
+                                      color: const Color(0xff436eee),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: ffem * 200),
+                                GestureDetector(
+                                  onTap: () {
+                                    sessionController.logout();
+                                    Get.toNamed(
+                                      RoutesName.authMainScreen,
+                                    );
+                                  },
+                                  child: Text(
+                                    'LogOut',
+                                    style: SafeGoogleFont(
+                                      'montserrat',
+                                      fontSize: 18 * ffem,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.2125 * ffem / fem,
+                                      color: const Color(0xff436eee),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),

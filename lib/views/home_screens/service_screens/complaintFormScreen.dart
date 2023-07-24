@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp/view_model/controller/request_controller/request_controller.dart';
@@ -220,16 +221,20 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
                                   ),
                                 ],
                               ),
-                              child: Text(
-                                'Submit',
-                                style: SafeGoogleFont(
-                                  'Montserrat',
-                                  fontSize: 18 * ffem,
-                                  fontWeight: FontWeight.w800,
-                                  height: 1.2175 * ffem / fem,
-                                  color: const Color(0xffffffff),
-                                ),
-                              ),
+                              child: controller.loading.value
+                                  ? Center(
+                                      child: SpinKitCircle(
+                                          size: 24, color: Colors.white))
+                                  : Text(
+                                      'Submit',
+                                      style: SafeGoogleFont(
+                                        'Montserrat',
+                                        fontSize: 18 * ffem,
+                                        fontWeight: FontWeight.w800,
+                                        height: 1.2175 * ffem / fem,
+                                        color: const Color(0xffffffff),
+                                      ),
+                                    ),
                             ),
                           ),
                         ],

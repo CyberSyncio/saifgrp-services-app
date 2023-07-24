@@ -54,19 +54,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    'Sign up',
-                    style: SafeGoogleFont(
-                      'Inter',
-                      fontSize: 18 * ffem,
-                      fontWeight: FontWeight.w500,
-                      height: 1.2125 * ffem / fem,
-                      color: const Color(0xff436eee),
-                    ),
-                  ),
-                ),
                 SizedBox(height: 50 * fem),
                 GetBuilder<RegisterController>(
                     init: RegisterController(),
@@ -91,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     focusNode: controller.emailFocusNode.value,
                                     decoration: const InputDecoration(
                                         hintText: 'abc@gmail.com',
-                                        suffixIcon: Icon(Icons.person),
+                                        prefixIcon: Icon(Icons.email_outlined),
                                         border: InputBorder.none)),
                               ),
                               SizedBox(height: 20 * fem),
@@ -112,6 +99,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         controller.passwordFocusNode.value,
                                     obscureText: pass,
                                     decoration: InputDecoration(
+                                        prefixIcon: const Icon(
+                                          Icons.key_outlined,
+                                        ),
                                         hintText: 'password',
                                         suffixIcon: IconButton(
                                             onPressed: () {

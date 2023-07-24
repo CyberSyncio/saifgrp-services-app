@@ -20,6 +20,7 @@ class RequestController extends GetxController {
   final StoreUserData _userToken = Get.put(StoreUserData());
   Map<String, String>? _header;
   String? _token;
+  final loading = false.obs;
   final _api = RequestRepository();
   final LoginController _loginController = Get.put(LoginController());
   dynamic argumentData = Get.arguments;
@@ -39,6 +40,8 @@ class RequestController extends GetxController {
   }
 
   requestApi() async {
+    final loading = true.obs;
+    update();
     var data = {
       "service": argumentData.toString(),
       "building": buildingId,
@@ -110,6 +113,9 @@ class RequestController extends GetxController {
                                                             RoutesName
                                                                 .homeMainScreen);
                                                       }).onError((error, stackTrace) {
+                                                        final loading =
+                                                            false.obs;
+                                                        update();
                                                         print(error.toString());
                                                         Utils.snackBar("Error",
                                                             "Something Went Wrong Please Try Again",

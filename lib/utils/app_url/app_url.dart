@@ -10,4 +10,5 @@ class AppUrl {
   static const String requestUrl = "$baseUrl/api/v1/requests/create/";
   static const String buildingUrl = "$baseUrl/api/v1/buildings/";
   static const String complaintHistoryUrl = "$baseUrl/api/v1/requests/";
+  static const String resetWebUrl = "$baseUrl/accounts/password/reset/";
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../../repository/change_password_repository/change_password_repository.dart';
 
 import '../../../utils/utils.dart';
@@ -9,11 +8,11 @@ import '../user_session_controller/store_user_data.dart';
 
 class ChangePasswordController extends GetxController {
   final confirmPasswordController = TextEditingController().obs;
-  final confirmPasswordFocusNode = FocusNode().obs;
+
   final passwordController = TextEditingController().obs;
-  final passwordFocusNode = FocusNode().obs;
+
   final currentpasswordController = TextEditingController().obs;
-  final currentpasswordFocusNode = FocusNode().obs;
+
   RxBool loading = false.obs;
 
   final StoreUserData _userToken = Get.put(StoreUserData());
@@ -32,6 +31,7 @@ class ChangePasswordController extends GetxController {
 
   void changePasswordApi() async {
     loading.value = true;
+    update();
 
     String newPassword1 = passwordController.value.text;
     String newPassword2 = confirmPasswordController.value.text;
@@ -40,11 +40,9 @@ class ChangePasswordController extends GetxController {
       Utils.snackBar("Error", "New password and confirm password mismatched",
           action: "error");
       loading.value = false;
+      update();
     } else {
-      var data = {
-        "new_password1": newPassword1,
-        "new_password2": newPassword2
-      };
+      var data = {"new_password1": newPassword1, "new_password2": newPassword2};
 
       try {
         var response = await _api.changePasswordApi(_header, data);

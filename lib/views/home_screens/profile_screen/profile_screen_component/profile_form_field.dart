@@ -53,7 +53,7 @@ class ProfileFormField extends StatelessWidget {
                 maxLines: maxLines,
                 decoration: InputDecoration(
                     hintText: hint,
-                    suffixIcon: maxLines > 1 ? null : Icon(icon),
+                    prefixIcon: maxLines > 1 ? null : Icon(icon),
                     border: InputBorder.none)),
           ),
         ],
