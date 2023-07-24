@@ -1,5 +1,6 @@
-import 'package:saif_app/data/networks/network_api_services.dart';
-import 'package:saif_app/resources/app_url/app_url.dart';
+
+import '../../data/networks/network_api_services.dart';
+import '../../utils/app_url/app_url.dart';
 
 class UpdateProfileRepository {
   final _apiServices = NetworkApiService();

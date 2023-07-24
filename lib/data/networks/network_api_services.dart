@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+
 import 'package:http/http.dart' as http;
-import 'package:saif_app/data/app_exceptions.dart';
-import 'package:saif_app/data/networks/base_api_services.dart';
+
+import '../app_exceptions.dart';
+import 'base_api_services.dart';
 
 class NetworkApiService extends BaseApiServices {
 //*..................................GET API....................................
@@ -12,7 +16,9 @@ class NetworkApiService extends BaseApiServices {
     required String url,
     Map<String, String>? header,
   }) async {
-
+    if (kDebugMode) {
+      print("The GetApi url is for testing :$url");
+    }
     dynamic responseJson;
     try {
       final response = await http
@@ -24,33 +30,36 @@ class NetworkApiService extends BaseApiServices {
       responseJson = returnResponseJson(response);
     } on SocketException {
       throw InternetException();
-    } on RequestTimeout {
-      throw RequestTimeout();
+    } on RequestTimout {
+      throw RequestTimout();
     }
+    //print(responseJson);
     return responseJson;
   }
 
 //*..................................POST API...................................
   @override
-  Future  postApi(
+  Future postApi(
       {required dynamic data,
       Map<String, String>? header,
       required String url}) async {
-
+    if (kDebugMode) {
+      print("The PostApi url is for testing :$url and Data is $data");
+    }
     dynamic responseJson;
     try {
       final response = await http
           .post(Uri.parse(url), headers: header, body: data)
           .timeout(const Duration(seconds: 10));
-     
+      print('response for put api is ${response.statusCode}');
 
       responseJson = returnResponseJson(response);
     } on SocketException {
       throw InternetException();
-    } on RequestTimeout {
-      throw RequestTimeout();
+    } on RequestTimout {
+      throw RequestTimout();
     }
-  
+    //print(responseJson);
     return responseJson;
   }
 
@@ -60,20 +69,22 @@ class NetworkApiService extends BaseApiServices {
       {required dynamic data,
       Map<String, String>? header,
       required String url}) async {
-  
+    if (kDebugMode) {
+      print("The PutApi url is for testing :$url and Data is $data");
+    }
     dynamic responseJson;
     try {
       final response = await http
           .put(Uri.parse(url), headers: header, body: data)
           .timeout(const Duration(seconds: 10));
-    
+      print('response for put api is ${response.statusCode}');
       responseJson = returnResponseJson(response);
     } on SocketException {
       throw InternetException();
-    } on RequestTimeout {
-      throw RequestTimeout();
+    } on RequestTimout {
+      throw RequestTimout();
     }
-
+    //print(responseJson);
     return responseJson;
   }
 
@@ -81,7 +92,6 @@ class NetworkApiService extends BaseApiServices {
     switch (response.statusCode) {
       case 200:
         dynamic responseJsn = jsonDecode(response.body);
-       
         return responseJsn;
       case 201:
         dynamic responseJsn = jsonDecode(response.body);

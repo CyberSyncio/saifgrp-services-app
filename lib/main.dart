@@ -1,40 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:saif_app/view_models/controller/store%20user%20session/store_user_data.dart';
-import 'package:saif_app/views/splashscreen/splash.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:myapp/utils/routes/routes.dart';
+import 'package:myapp/views/splash_screen.dart';
 
-import 'resources/routes/routes.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  final StoreUserData sessionController = Get.put(StoreUserData());
-  // This widget is the root of your application.
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: 'Saif App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            iconTheme: const IconThemeData(color: Colors.white),
-            fontFamily: "geometric sans-serif typeface",
-            textTheme:
-                GoogleFonts.openSansTextTheme(Theme.of(context).textTheme),
-            // colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-            useMaterial3: true,
-            visualDensity: VisualDensity.adaptivePlatformDensity),
-        home: const SplashScreen(),
-
-        //     Obx(() {
-        //   return sessionController.isLoggedIn.value
-        //       ? const HomeMainScreen()
-        //       : Login();
-        // }),
-        getPages: AppRoutes.appRoutes());
+          primarySwatch: Colors.blue,
+        ),
+        getPages: AppRoutes.appRoutes(),
+        home: const SplashScreen());
   }
 }

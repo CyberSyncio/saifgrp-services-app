@@ -1,32 +1,12 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:saif_app/resources/colors/app_colors.dart';
 
 // ......................FOCUS CHANGE..............................
 class Utils {
-  static final kBottomNavigationBar = [
-    const BottomNavigationBarItem(
-      icon: Icon(
-        Icons.home_outlined,
-      ),
-      label: 'Resedent',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(
-        Icons.show_chart_rounded,
-        size: 40,
-      ),
-      label: 'Services',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(
-        Icons.history_outlined,
-      ),
-      label: 'History',
-    ),
-  ];
-
   static void feildFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
@@ -36,7 +16,7 @@ class Utils {
 // ......................TOAST..............................
 
   static getSnackBarColor({String? action}) {
-    var backgroundColor = AppColor.blackColor;
+    var backgroundColor = Colors.black;
 
     if (action == "success") {
       backgroundColor = Colors.green;
@@ -45,7 +25,7 @@ class Utils {
     } else if (action == "warning") {
       backgroundColor = Colors.yellowAccent;
     } else if (action == "info") {
-      backgroundColor = AppColor.kPrimaryColor;
+      backgroundColor = Colors.orange;
     } else if (action == "debug") {
       backgroundColor = Colors.black54;
     } else {
@@ -64,135 +44,73 @@ class Utils {
   }
 }
 
-// ......................CUSTOM BUTTON..............................
-class CustomButton extends StatelessWidget {
-  final String title;
-  final void Function()? onPressed;
-  final TextStyle textStyle;
-
-  const CustomButton({
-    Key? key,
-    required this.title,
-    required this.onPressed,
-    this.textStyle = const TextStyle(
-      fontSize: 18.0,
-      color: Colors.white,
-      fontWeight: FontWeight.w600,
-    ),
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * .06,
-      width: MediaQuery.sizeOf(context).width * .9,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor:
-              AppColor.kbackGroundColor, // Background color of the button
-          foregroundColor: Colors.white, // Text color
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20), // Rounded corners
-          ),
-          elevation: 0, // Shadow elevation
-          textStyle: GoogleFonts.montserrat(
-            fontSize: 20.0,
-            color: AppColor.kWhiteColor,
-            fontWeight: FontWeight.w800,
-          ),
-          padding: const EdgeInsets.symmetric(
-              horizontal: 16, vertical: 10), // Button padding
-        ),
-        child: Text(title),
-      ),
+TextStyle SafeGoogleFont(
+  String fontFamily, {
+  TextStyle? textStyle,
+  Color? color,
+  Color? backgroundColor,
+  double? fontSize,
+  FontWeight? fontWeight,
+  FontStyle? fontStyle,
+  double? letterSpacing,
+  double? wordSpacing,
+  TextBaseline? textBaseline,
+  double? height,
+  Locale? locale,
+  Paint? foreground,
+  Paint? background,
+  List<Shadow>? shadows,
+  List<FontFeature>? fontFeatures,
+  TextDecoration? decoration,
+  Color? decorationColor,
+  TextDecorationStyle? decorationStyle,
+  double? decorationThickness,
+}) {
+  try {
+    return GoogleFonts.getFont(
+      fontFamily,
+      textStyle: textStyle,
+      color: color,
+      backgroundColor: backgroundColor,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontStyle: fontStyle,
+      letterSpacing: letterSpacing,
+      wordSpacing: wordSpacing,
+      textBaseline: textBaseline,
+      height: height,
+      locale: locale,
+      foreground: foreground,
+      background: background,
+      shadows: shadows,
+      fontFeatures: fontFeatures,
+      decoration: decoration,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+      decorationThickness: decorationThickness,
+    );
+  } catch (ex) {
+    return GoogleFonts.getFont(
+      "Source Sans Pro",
+      textStyle: textStyle,
+      color: color,
+      backgroundColor: backgroundColor,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontStyle: fontStyle,
+      letterSpacing: letterSpacing,
+      wordSpacing: wordSpacing,
+      textBaseline: textBaseline,
+      height: height,
+      locale: locale,
+      foreground: foreground,
+      background: background,
+      shadows: shadows,
+      fontFeatures: fontFeatures,
+      decoration: decoration,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+      decorationThickness: decorationThickness,
     );
   }
 }
-
-// ......................CUSTOM BUTTON..............................
-class RequestButton extends StatelessWidget {
-  final String title;
-  final Function()? onPressed;
-
-  const RequestButton({
-    Key? key,
-    required this.title,
-    required this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * .06,
-      width: MediaQuery.sizeOf(context).width * .9,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor:
-              AppColor.kbackGroundColor, // Background color of the button
-          foregroundColor: Colors.white, // Text color
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20), // Rounded corners
-          ),
-          elevation: 0, // Shadow elevation
-          textStyle: GoogleFonts.montserrat(
-            fontSize: 20.0,
-            color: AppColor.kWhiteColor,
-            fontWeight: FontWeight.w800,
-          ),
-          padding: const EdgeInsets.symmetric(
-              horizontal: 16, vertical: 10), // Button padding
-        ),
-        child: Text(title),
-      ),
-    );
-  }
-}
-
-const textStyle1 = TextStyle(
-  fontSize: 32,
-  fontWeight: FontWeight.bold,
-  color: Colors.white,
-);
-const textStyle2 = TextStyle(
-  fontSize: 22,
-  fontWeight: FontWeight.bold,
-  color: Colors.white,
-);
-const textStyle3 = TextStyle(
-  fontSize: 18,
-  fontWeight: FontWeight.bold,
-  color: Colors.white,
-);
-const textStyle4 = TextStyle(
-  fontSize: 18,
-  fontWeight: FontWeight.normal,
-  color: Colors.white,
-);
-const textStyle5 = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.bold,
-  color: Colors.white,
-);
-const textStyle6 = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.normal,
-  color: Colors.white,
-);
-const textStyle7 = TextStyle(
-  fontSize: 14,
-  fontWeight: FontWeight.bold,
-  color: Colors.white,
-);
-const textStyle8 = TextStyle(
-  fontSize: 14,
-  fontWeight: FontWeight.normal,
-  color: Colors.white,
-);
-//
-const textStyle9 = TextStyle(
-  fontSize: 16,
-  fontWeight: FontWeight.normal,
-  color: Colors.grey,
-);

@@ -1,5 +1,6 @@
-name: saif_app
-description: A new Flutter project.
+name: myapp
+description: A exported flutter project from FUNCTION12
+
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -19,7 +20,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.5 <4.0.0"
+  sdk: ">=2.18.2 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -28,30 +29,32 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  fluttertoast: ^8.2.2
   get: ^4.6.5
-  google_fonts: ^5.0.0
-  google_nav_bar: ^5.0.6
-  http: ^1.0.0
-  shared_preferences: ^2.1.2
-  quickalert: ^1.0.1
-  persistent_bottom_nav_bar: ^5.0.2
-  image_picker: ^0.8.9
-  lottie: ^2.4.0
+  google_fonts: ^5.1.0
+  intl: ^0.18.1
+  shared_preferences: ^2.2.0
+  url_launcher: ^6.1.12
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_spinkit: ^5.2.0
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^2.0.0
-  flutter_test:
-    sdk: flutter
 
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/saiflogooo.png"
+  image_path: "assets/saiflogooo.png"
+
+  flutter_spinkit: ^5.2.0
+
+  flutter_test:
+    sdk: flutter
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
@@ -62,8 +65,88 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
   assets:
-    - assets/images/
+    - assets/page-1/images/vector.png
+    - assets/page-1/images/wifi-icon.png
+    - assets/page-1/images/image-4.png
+    - assets/page-1/images/checkbox.png
+    - assets/page-1/images/wifi-icon-wso.png
+    - assets/page-1/images/image-6.png
+    - assets/page-1/images/rectangle-41.png
+    - assets/page-1/images/unsplash-1c8sj2io2i4-bg.png
+    - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1.png
+    - assets/page-1/images/vector-tjj.png
+    - assets/page-1/images/image-5.png
+    - assets/page-1/images/wifi-icon-VaH.png
+    - assets/page-1/images/image-5-unq.png
+    - assets/page-1/images/rectangle-41-br1.png
+    - assets/page-1/images/wifi-icon-1uj.png
+    - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-cM7.png
+    - assets/page-1/images/image-5-dvy.png
+    - assets/page-1/images/batery-icon.png
+    - assets/page-1/images/image-4-TUd.png
+    - assets/page-1/images/vector-ajb.png
+    - assets/page-1/images/batery-icon-zB3.png
+    - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-3CM.png
+    - assets/page-1/images/image-5-K21.png
+    - assets/page-1/images/image-7.png
+    - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-39b.png
+    - assets/page-1/images/unsplash-1c8sj2io2i4-bg-ZsF.png
+    - assets/page-1/images/wifi-icon-Z5s.png
+    - assets/page-1/images/batery-icon-hzZ.png
+    - assets/page-1/images/group-14.png
+    - assets/page-1/images/group-12.png
+    - assets/page-1/images/rectangle-30.png
+    - assets/page-1/images/wifi-icon-y8V.png
+    - assets/page-1/images/batery-icon-r5o.png
+    - assets/page-1/images/image-6-4BB.png
+    - assets/page-1/images/rectangle-41-U3s.png
+    - assets/page-1/images/batery-icon-PUD.png
+    - assets/page-1/images/image-14.png
+    - assets/page-1/images/image-6-uNZ.png
+    - assets/page-1/images/image-4-oVB.png
+    - assets/page-1/images/vector-hgM.png
+    - assets/page-1/images/group-12-Tso.png
+    - assets/page-1/images/batery-icon-Z69.png
+    - assets/page-1/images/wifi-icon-tZP.png
+    - assets/page-1/images/vector-4Zf.png
+    - assets/page-1/images/image-7-MHB.png
+    - assets/page-1/images/back-button.png
+    - assets/page-1/images/image-7-CDo.png
+    - assets/page-1/images/user.png
+    - assets/page-1/images/unsplash-1c8sj2io2i4-bg-4HP.png
+    - assets/page-1/images/ellipse-2-bg.png
+    - assets/page-1/images/rectangle-30-REy.png
+    - assets/page-1/images/vector-eos.png
+    - assets/page-1/images/unsplash-1c8sj2io2i4-bg-4GZ.png
+    - assets/page-1/images/rectangle-31-bg.png
+    - assets/page-1/images/image-6-dXF.png
+    - assets/page-1/images/rectangle-30-2FB.png
+    - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-nmP.png
+    - assets/page-1/images/ellipse-2-bg-VWh.png
+    - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-Kjw.png
+    - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-qGm.png
+    - assets/page-1/images/image-11.png
+    - assets/page-1/images/vector-Udw.png
+    - assets/page-1/images/image-10.png
+    - assets/page-1/images/batery-icon-xDP.png
+    - assets/page-1/images/image-4-nmP.png
+    - assets/page-1/images/rectangle-31-bg-nLZ.png
+    - assets/page-1/images/image-7-FfP.png
+    - assets/page-1/images/image-9.png
+    - assets/page-1/images/ellipse-2-bg-Qtq.png
+    - assets/page-1/images/ellipse-2-bg-x9o.png
+    - assets/page-1/images/image-12.png
+    - assets/page-1/images/group-14-83s.png
+    - assets/page-1/images/group-14-9wf.png
+    - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-RSR.png
+    - assets/page-1/images/group-14-o6H.png
+    - assets/page-1/images/rectangle-31-bg-96R.png
+    - assets/page-1/images/rectangle-31-bg-CWm.png
+    - assets/page-1/images/plumber-1.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

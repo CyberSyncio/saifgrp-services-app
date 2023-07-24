@@ -21,9 +21,9 @@ class ComplaintModel {
   ComplaintModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     service =
-        json['service'] != null ?  Service.fromJson(json['service']) : null;
+        json['service'] != null ? new Service.fromJson(json['service']) : null;
     building = json['building'] != null
-        ?  Building.fromJson(json['building'])
+        ? new Building.fromJson(json['building'])
         : null;
     description = json['description'];
     charge = json['charge'];
@@ -33,19 +33,19 @@ class ComplaintModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
-    data['id'] = id;
-    if (service != null) {
-      data['service'] = service!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    if (this.service != null) {
+      data['service'] = this.service!.toJson();
     }
-    if (building != null) {
-      data['building'] = building!.toJson();
+    if (this.building != null) {
+      data['building'] = this.building!.toJson();
     }
-    data['description'] = description;
-    data['charge'] = charge;
-    data['created_on'] = createdOn;
-    data['updated_on'] =updatedOn;
-    data['status'] = status;
+    data['description'] = this.description;
+    data['charge'] = this.charge;
+    data['created_on'] = this.createdOn;
+    data['updated_on'] = this.updatedOn;
+    data['status'] = this.status;
     return data;
   }
 }
@@ -76,13 +76,13 @@ class Service {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['image'] = image;
-    data['description'] =description;
-    data['price'] = price;
-    data['is_active'] = isActive;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['image'] = this.image;
+    data['description'] = this.description;
+    data['price'] = this.price;
+    data['is_active'] = this.isActive;
     return data;
   }
 }
@@ -105,12 +105,12 @@ class Building {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['description'] =description;
-    data['price'] = price;
-    data['is_active'] = isActive;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['description'] = this.description;
+    data['price'] = this.price;
+    data['is_active'] = this.isActive;
     return data;
   }
 }
