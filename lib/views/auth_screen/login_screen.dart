@@ -158,25 +158,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                           )),
                       SizedBox(height: 20 * fem),
-                      SizedBox(
-                        height: 20 * fem,
-                        child: InkWell(
-                          onTap: () {
-                            // Add your URL here
-                            String url = AppUrl.resetWebUrl;
-                          },
-                          child: Text(
-                            'Forgot password?',
-                            style: SafeGoogleFont(
-                              'montserrat',
-                              fontSize: 14 * ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.2125 * ffem / fem,
-                              color: const Color(0xff436eee),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              // Add your URL here
+                              String url = AppUrl.resetWebUrl;
+                            },
+                            child: Text(
+                              'Forgot password?',
+                              style: SafeGoogleFont(
+                                'montserrat',
+                                fontSize: 14 * ffem,
+                                fontWeight: FontWeight.w500,
+                                height: 1.2125 * ffem / fem,
+                                color: const Color(0xff436eee),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                        ],
+                      )
                     ],
                   ),
                 ),

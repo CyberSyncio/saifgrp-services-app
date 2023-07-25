@@ -35,7 +35,7 @@ class ChangePasswordController extends GetxController {
 
     await _api.changePasswordApi(_header, data).then((value) {
       {
-        Utils.snackBar('', value['detail']);
+        Utils.snackBar('Successfully', value['detail'], action: "success");
         loading.value = false;
         update();
       }
