@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:myapp/utils/app_url/app_url.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../utils/utils.dart';
 import '../../view_model/controller/login controller/login_screen_controller.dart';
 
@@ -16,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool pass = true;
   final _formKey = GlobalKey<FormState>();
+  LoginController controller = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 428;
@@ -56,162 +57,129 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 50 * fem),
-                GetBuilder<LoginController>(
-                    init: LoginController(),
-                    builder: (controller) {
-                      return Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60 * fem,
-                              width: 384 * fem,
-                              padding: const EdgeInsets.only(left: 7),
-                              margin: const EdgeInsets.only(top: 7),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10 * fem),
-                                border:
-                                    Border.all(color: const Color(0xffd3d1d9)),
-                              ),
-                              child: TextFormField(
-                                  controller: controller.emailController.value,
-                                  focusNode: controller.emailFocusNode.value,
-                                  keyboardType: TextInputType.emailAddress,
-                                  textAlignVertical: TextAlignVertical.center,
-                                  decoration: const InputDecoration(
-                                      hintText: 'example@gmail.com',
-                                      prefixIcon: Icon(Icons.email_outlined),
-                                      border: InputBorder.none)),
-                            ),
-                            SizedBox(height: 20 * fem),
-                            Container(
-                              height: 60 * fem,
-                              width: 384 * fem,
-                              padding: const EdgeInsets.only(left: 7),
-                              margin: const EdgeInsets.only(top: 7),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10 * fem),
-                                border:
-                                    Border.all(color: const Color(0xffd3d1d9)),
-                              ),
-                              child: TextFormField(
-                                  controller:
-                                      controller.passwordController.value,
-                                  focusNode: controller.passwordFocusNode.value,
-                                  obscureText: pass,
-                                  textAlignVertical: TextAlignVertical.center,
-                                  decoration: InputDecoration(
-                                      prefixIcon: const Icon(
-                                        Icons.key_outlined,
-                                      ),
-                                      hintText: 'password',
-                                      suffixIcon: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              pass = !pass;
-                                            });
-                                          },
-                                          icon: Icon(pass
-                                              ? Icons.remove_red_eye_outlined
-                                              : Icons.remove_red_eye)),
-                                      border: InputBorder.none)),
-                            ),
-                            SizedBox(height: 30 * fem),
-                            InkWell(
-                                onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    if (controller.emailController.value.text
-                                            .isEmpty &&
-                                        controller.passwordController.value.text
-                                            .isEmpty) {
-                                      Utils.snackBar('Error',
-                                          'Field Must include "email" and "password',
-                                          action: 'error');
-                                    } else {
-                                      controller.loginApi();
-                                    }
-                                  }
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: 384 * fem,
-                                  height: 45 * fem,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xff436eee),
-                                    borderRadius:
-                                        BorderRadius.circular(10 * fem),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: const Color(0x3f000000),
-                                        offset: Offset(0 * fem, 4 * fem),
-                                        blurRadius: 2 * fem,
-                                      ),
-                                    ],
-                                  ),
-                                  child: controller.loading.value
-                                      ? const Center(
-                                          child: SpinKitCircle(
-                                              size: 24, color: Colors.white))
-                                      : Text(
-                                          'Login',
-                                          style: SafeGoogleFont(
-                                            'montserrat',
-                                            fontSize: 18 * ffem,
-                                            fontWeight: FontWeight.w800,
-                                            height: 1.2125 * ffem / fem,
-                                            color: const Color(0xffffffff),
-                                          ),
-                                        ),
-                                )),
-                            SizedBox(height: 20 * fem),
-                            SizedBox(
-                              height: 20 * fem,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  CheckboxMenuButton(
-                                    value: controller.check.value,
-                                    onChanged: (val) {
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 60 * fem,
+                        width: 384 * fem,
+                        padding: const EdgeInsets.only(left: 7),
+                        margin: const EdgeInsets.only(top: 7),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10 * fem),
+                          border: Border.all(color: const Color(0xffd3d1d9)),
+                        ),
+                        child: TextFormField(
+                            controller: controller.emailController.value,
+                            focusNode: controller.emailFocusNode.value,
+                            keyboardType: TextInputType.emailAddress,
+                            textAlignVertical: TextAlignVertical.center,
+                            decoration: const InputDecoration(
+                                hintText: 'example@gmail.com',
+                                prefixIcon: Icon(Icons.email_outlined),
+                                border: InputBorder.none)),
+                      ),
+                      SizedBox(height: 20 * fem),
+                      Container(
+                        height: 60 * fem,
+                        width: 384 * fem,
+                        padding: const EdgeInsets.only(left: 7),
+                        margin: const EdgeInsets.only(top: 7),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10 * fem),
+                          border: Border.all(color: const Color(0xffd3d1d9)),
+                        ),
+                        child: TextFormField(
+                            controller: controller.passwordController.value,
+                            focusNode: controller.passwordFocusNode.value,
+                            obscureText: pass,
+                            textAlignVertical: TextAlignVertical.center,
+                            decoration: InputDecoration(
+                                prefixIcon: const Icon(
+                                  Icons.key_outlined,
+                                ),
+                                hintText: 'password',
+                                suffixIcon: IconButton(
+                                    onPressed: () {
                                       setState(() {
-                                        controller.check.value = val!;
+                                        pass = !pass;
                                       });
                                     },
-                                    child: Text(
-                                      'Remember Me',
-                                      style: SafeGoogleFont(
-                                        'montserrat',
-                                        fontSize: 14 * ffem,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.2125 * ffem / fem,
-                                        color: const Color(0xff646464),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 170 * fem),
-                                  InkWell(
-                                    onTap: () {
-                                      // Add your URL here
-                                      String url = AppUrl.resetWebUrl;
-                                      launch(url);
-                                    },
-                                    child: Text(
-                                      'Forgot password?',
-                                      style: SafeGoogleFont(
-                                        'montserrat',
-                                        fontSize: 14 * ffem,
-                                        fontWeight: FontWeight.w500,
-                                        height: 1.2125 * ffem / fem,
-                                        color: const Color(0xff436eee),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                    icon: Icon(pass
+                                        ? Icons.remove_red_eye_outlined
+                                        : Icons.remove_red_eye)),
+                                border: InputBorder.none)),
+                      ),
+                      SizedBox(height: 30 * fem),
+                      InkWell(
+                          onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              if (controller
+                                      .emailController.value.text.isEmpty &&
+                                  controller
+                                      .passwordController.value.text.isEmpty) {
+                                Utils.snackBar('Error',
+                                    'Field Must include "email" and "password',
+                                    action: 'error');
+                              } else {
+                                controller.loginApi();
+                              }
+                            }
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: 384 * fem,
+                            height: 45 * fem,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff436eee),
+                              borderRadius: BorderRadius.circular(10 * fem),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0x3f000000),
+                                  offset: Offset(0 * fem, 4 * fem),
+                                  blurRadius: 2 * fem,
+                                ),
+                              ],
                             ),
-                          ],
+                            child: controller.loading.value
+                                ? const Center(
+                                    child: SpinKitCircle(
+                                        size: 24, color: Colors.white))
+                                : Text(
+                                    'Login',
+                                    style: SafeGoogleFont(
+                                      'montserrat',
+                                      fontSize: 18 * ffem,
+                                      fontWeight: FontWeight.w800,
+                                      height: 1.2125 * ffem / fem,
+                                      color: const Color(0xffffffff),
+                                    ),
+                                  ),
+                          )),
+                      SizedBox(height: 20 * fem),
+                      SizedBox(
+                        height: 20 * fem,
+                        child: InkWell(
+                          onTap: () {
+                            // Add your URL here
+                            String url = AppUrl.resetWebUrl;
+                          },
+                          child: Text(
+                            'Forgot password?',
+                            style: SafeGoogleFont(
+                              'montserrat',
+                              fontSize: 14 * ffem,
+                              fontWeight: FontWeight.w500,
+                              height: 1.2125 * ffem / fem,
+                              color: const Color(0xff436eee),
+                            ),
+                          ),
                         ),
-                      );
-                    }),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

@@ -40,6 +40,7 @@ class Utils {
     Get.snackbar(newtitle, newmessage,
         colorText: Colors.white,
         backgroundColor: backgroundColor,
+        // duration: const Duration(milliseconds: 1200),
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10));
   }
 }

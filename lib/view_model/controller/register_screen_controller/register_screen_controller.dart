@@ -16,6 +16,7 @@ class RegisterController extends GetxController {
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
   final emailFocusNode = FocusNode().obs;
+  final userNameFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
   final confirmPasswordController = TextEditingController().obs;
   final confirmPasswordFocusNode = FocusNode().obs;
@@ -41,18 +42,21 @@ class RegisterController extends GetxController {
   }
 
   getBuildingDetails() {
+    buildingDetails.clear(); // Clear the list before adding new items
+    //  buildingList.clear();
     for (var i = 0; i < _building.buildingModel.length; i++) {
       buildingDetails.add({
         'id': _building.buildingModel[i]['id'],
         'name': _building.buildingModel[i]['name']
       });
     }
-    buildingList.add(dropDownValue.value);
-    for (var i = 1; i < _building.buildingModel.length; i++) {
-      buildingList.add(_building.buildingModel[i]['name']);
+    if (!buildingList.contains(dropDownValue.value)) {
+      buildingList.add(dropDownValue.value);
     }
 
-    update();
+    for (var i = 0; i < buildingDetails.length; i++) {
+      buildingList.add(buildingDetails[i]['name']);
+    }
   }
 
   getBuildingId() async {
@@ -67,7 +71,7 @@ class RegisterController extends GetxController {
     }
   }
 
-  void registerApi() {
+  void registerApi() async {
     loading.value = true;
     update();
     var data = {
@@ -77,45 +81,65 @@ class RegisterController extends GetxController {
       "password2": confirmPasswordController.value.text,
       "building": buildingId.value
     };
-
-    if (dropDownValue.value.contains('Select Your Residential')) {
+    await _api.registerApi(data).then((value) {
+      Utils.snackBar("Registration ", "Successfully Registered",
+          action: "success");
+      emailController.value.clear();
+      passwordController.value.clear();
+      _mainScreenController.setIndex(0);
+      Get.offAllNamed(RoutesName.authMainScreen);
       loading.value = false;
       update();
-      Utils.snackBar('Error', 'Select Your Residential', action: 'error');
-    } else {
-      _api.registerApi(data).then((value) {
-        Utils.snackBar("Registration ", "Successfully Registered",
-            action: "success");
-        emailController.value.clear();
-        passwordController.value.clear();
-        // buildingId.value.clear();
-        _mainScreenController.setIndex(0);
-        Get.offAllNamed(RoutesName.authMainScreen);
-        update();
-        // Get.toNamed(RoutesName.loginScreen);
-      }).onError((error, stackTrace) {
-        loading.value = false;
-        update();
-        var errorr = jsonDecode(error.toString());
-        print(errorr.toString());
-        Utils.snackBar(
-            "Error",
-            emailController.value.text.isEmpty &&
-                    passwordController.value.text.isEmpty
-                ? "${"Email: " + errorr['username'][0]}\nPassword: " +
-                    errorr['password'][0]
-                : emailController.value.text.isEmail == false &&
-                        passwordController.value.text.isEmpty
-                    ? "${errorr['email'][0] + "\nPassword: " + errorr['password'][0]}"
-                    : emailController.value.text.isEmpty
-                        ? "Email: " + errorr['userName'][0]
-                        : passwordController.value.text.isEmpty
-                            ? "Password: " + errorr['password'][0]
-                            : emailController.value.text.isEmail == false
-                                ? "Email: " + errorr['email'][0]
-                                : errorr['username'][0],
-            action: "error");
-      });
+    }).onError((error, stackTrace) {
+      var errorr = jsonDecode(error.toString());
+      String errorMessage = '';
+
+      for (var entry in errorr.entries) {
+        String fieldName = entry.key;
+        List<String> errorMessages = (entry.value as List).cast<String>();
+        errorMessage +=
+            '${capitalizeFirstLetter(fieldName)}: ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
+        print(errorMessage);
+      }
+      Utils.snackBar('Error', errorMessage, action: 'error');
+    });
+    loading.value = false;
+    update();
+  }
+
+  String capitalizeFirstLetter(String input) {
+    if (input.isEmpty) {
+      return input;
     }
+
+    return input[0].toUpperCase() + input.substring(1);
   }
 }
+
+
+
+
+   // print(errorr);
+      // if (userNameController.value.text.isEmpty &&
+      //     emailController.value.text.isEmpty &&
+      //     passwordController.value.text.isEmpty &&
+      //     dropDownValue.value.contains('Select Your Residential')) {
+      //   Utils.snackBar('Error', " All fields are required", action: 'error');
+      // } else if (emailController.value.text.isEmpty &&
+      //     passwordController.value.text.isEmpty &&
+      //     confirmPasswordController.value.text.isEmpty &&
+      //     dropDownValue.value.contains('Select Your Residential')) {
+      //   Utils.snackBar('Error',
+      //       "Email: ${errorr['email'][0]} \nPassword: ${errorr['password'][0]} \nConfirm Password: ${errorr['password2'][0]} \nBuilding: ${errorr['building'][0]}",
+      //       action: 'error');
+      // } else if (confirmPasswordController.value.text.isEmpty) {
+      //   Utils.snackBar(
+      //       'Error', "Confirm Password: ${errorr['new_password2'][0]}",
+      //       action: 'error');
+      // } else if (confirmPasswordController.value.text !=
+      //     passwordController.value.text) {
+      //   Utils.snackBar('Error', "New Password: ${errorr['new_password2'][0]}",
+      //       action: 'error');
+      // } else {
+
+      //  }

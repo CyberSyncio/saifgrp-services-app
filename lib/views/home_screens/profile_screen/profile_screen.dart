@@ -95,7 +95,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             SizedBox(height: 10 * fem),
                             InkWell(
                               onTap: () {
-                                controller.updateProfileApi();
+                                if (controller.loading.value) {
+                                } else {
+                                  controller.updateProfileApi();
+                                }
                               },
                               child: Container(
                                 alignment: Alignment.center,

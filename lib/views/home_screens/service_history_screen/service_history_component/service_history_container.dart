@@ -7,6 +7,7 @@ Widget serviceHistoryScreenContainer(
     required double ffem,
     required String img,
     required String title,
+    required String description,
     required String subtitle}) {
   return Container(
     // group97XHj (40:589)
@@ -64,6 +65,17 @@ Widget serviceHistoryScreenContainer(
                 SizedBox(height: 10 * fem),
                 Text(
                   "Date : $subtitle",
+                  style: SafeGoogleFont(
+                    'Montserrat',
+                    fontSize: 13 * ffem,
+                    fontWeight: FontWeight.w500,
+                    height: 1.2175 * ffem / fem,
+                    color: const Color(0x7f000000),
+                  ),
+                ),
+                SizedBox(height: 10 * fem),
+                Text(
+                  description,
                   style: SafeGoogleFont(
                     'Montserrat',
                     fontSize: 13 * ffem,

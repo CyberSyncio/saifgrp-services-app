@@ -15,9 +15,7 @@ class AllServicesController extends GetxController {
   getServices() async {
     try {
       serviceListModel = await _servicesRepo.getServices();
-    } catch (e) {
-      print("this is error $e");
-    }
+    } catch (e) {}
     isRefresh = false.obs;
     isLoading = false.obs;
     update();

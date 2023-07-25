@@ -66,7 +66,7 @@ Widget serviceScreenContainer(
                 ),
                 SizedBox(height: 10 * fem),
                 Text(
-                  subtitle.isEmpty ? 'Best Services' : subtitle,
+                  subtitle.isEmpty ? '' : subtitle,
                   style: SafeGoogleFont(
                     'Montserrat',
                     fontSize: 13 * ffem,

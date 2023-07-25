@@ -5,10 +5,22 @@ import 'package:myapp/view_model/controller/auth_controller/auth_controller.dart
 import '../utils/routes/routes_name.dart';
 import '../utils/utils.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  WelcomeScreen({super.key});
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
   final AuthMainScreenController _authController =
       Get.put(AuthMainScreenController());
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 428;

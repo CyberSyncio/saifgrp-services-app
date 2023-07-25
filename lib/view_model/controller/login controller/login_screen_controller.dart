@@ -17,10 +17,13 @@ class LoginController extends GetxController {
   final passwordController = TextEditingController().obs;
   final emailFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
-  final check = false.obs;
-  final usertoken = ''.obs;
+  var usertoken = ''.obs;
   final loading = false.obs;
+
   StoreUserData userData = Get.put(StoreUserData());
+  // final ServiceHistoryController _serviceController =
+  //     Get.put(ServiceHistoryController());
+
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
   final _api = LoginRepository();
@@ -32,62 +35,37 @@ class LoginController extends GetxController {
       "password": passwordController.value.text
     };
     _api.loginApi(data).then((value) async {
-      if (check.value) {
-        print("Inside if True status" + check.value.toString());
-        await userData.login(value['key'], check.value);
-      } else {
-        print("Inside if Else status" + check.value.toString());
-        await userData.login('', check.value);
-        print(value['key'].toString());
-        usertoken.value = value['key'].toString();
-        print('value of token in login Controller is ' + usertoken.value);
-      }
-      print('Value of Check inside Login Controller' + check.value.toString());
-      Get.offAllNamed(RoutesName.homeMainScreen);
+      await userData.login(value['key']);
+      Get.offAndToNamed(RoutesName.homeMainScreen, arguments: usertoken.value);
       emailController.value.clear();
       passwordController.value.clear();
       loading.value = false;
       update();
     }).onError((error, stackTrace) {
-      loading.value = false;
       var errorr = jsonDecode(error.toString());
-      if (emailController.value.text.isEmpty) {
-        Utils.snackBar('Error', "Email :" + errorr['non_field_errors'][0],
-            action: 'error');
-      } else if (emailController.value.text.isEmail == false &&
-          emailController.value.text.isNotEmpty &&
-          passwordController.value.text.isNotEmpty) {
-        Utils.snackBar('Error', errorr['email'][0], action: 'error');
-      } else if (passwordController.value.text.isNotEmpty &&
-          emailController.value.text.isNotEmpty &&
-          emailController.value.text.isEmail) {
-        Utils.snackBar('Error', errorr['non_field_errors'][0], action: 'error');
-      } else if (emailController.value.text.isEmpty) {
-        Utils.snackBar('Error', "Field: " + errorr['non_field_errors'][0],
-            action: 'error');
-      } else if (emailController.value.text.isEmpty &&
-          passwordController.value.text.isEmpty) {
-        Utils.snackBar("Error", errorr['password'][0], action: 'error');
-      } else if (emailController.value.text.isEmail == false &&
-          passwordController.value.text.isEmpty) {
-        Utils.snackBar(
-            'Error',
-            "${"Email: " + errorr['email'][0]}\n\nPassword :" +
-                errorr['password'][0],
-            action: 'error');
-      } else if (passwordController.value.text.isEmpty) {
-        Utils.snackBar('Error', "Password :" + errorr['password'][0],
-            action: 'error');
-      } else {
-        Utils.snackBar('Error', errorr['non_field_errors'][0], action: 'error');
+      String errorMessage = '';
+
+      for (var entry in errorr.entries) {
+        String fieldName = entry.key == 'non_field_errors' ? '' : entry.key;
+        List<String> errorMessages = (entry.value as List).cast<String>();
+        errorMessage +=
+            '${capitalizeFirstLetter(fieldName)}${entry.key == 'non_field_errors' ? '' : ':'} ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
       }
-      passwordController.value.clear();
+      print(errorMessage);
+      Utils.snackBar('Error', errorMessage, action: 'error');
+      loading.value = false;
       update();
     });
+    loading.value = false;
+    update();
+    // }
   }
 
-  String userToken() {
-    print(usertoken.value);
-    return usertoken.value;
+  String capitalizeFirstLetter(String input) {
+    if (input.isEmpty) {
+      return input;
+    }
+
+    return input[0].toUpperCase() + input.substring(1);
   }
 }

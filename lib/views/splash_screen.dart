@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:myapp/view_model/controller/splash_screen_controller/splash_screen_controller.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,11 +10,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SplashScreenController _splashScreenController =
+  final SplashScreenController _splashScreenController =
       Get.put(SplashScreenController());
   @override
   void initState() {
-    _splashScreenController.isLogin();
     super.initState();
   }
 

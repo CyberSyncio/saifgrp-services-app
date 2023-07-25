@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/utils/routes/routes_name.dart';
-import 'package:myapp/view_model/controller/login%20controller/login_screen_controller.dart';
 
 import '../../../repository/update_profile_repository/update_profile_repository.dart';
 import '../../../utils/utils.dart';
@@ -16,6 +15,7 @@ class UpdateProfileController extends GetxController {
   final userNameFocusNode = FocusNode().obs;
   final firstNameFocusNode = FocusNode().obs;
   final lastNameFocusNode = FocusNode().obs;
+  var arg = Get.arguments;
   var _userData = {};
   RxBool loading = false.obs;
   bool? checkLogin;
@@ -23,15 +23,9 @@ class UpdateProfileController extends GetxController {
   Map<String, String>? _header;
   String _token = '';
   final _api = UpdateProfileRepository();
-  final LoginController _loginController = Get.put(LoginController());
   @override
   void onInit() async {
-    checkLogin = await _userToken.getLoginStatus();
-    if (checkLogin!) {
-      _token = await _userToken.getToken();
-    } else {
-      _token = _loginController.userToken();
-    }
+    _token = await _userToken.getToken();
     _header = {'authorization': 'Token $_token'};
     await getUserDetailApi();
     super.onInit();
@@ -59,7 +53,7 @@ class UpdateProfileController extends GetxController {
     update();
   }
 
-  updateProfileApi() {
+  updateProfileApi() async {
     loading.value = true;
     update();
     var data = {
@@ -67,19 +61,33 @@ class UpdateProfileController extends GetxController {
       "first_name": firstNameController.value.text,
       "last_name": lastNameController.value.text,
     };
-    _api.updateProfileApi(data, _header).then((value) async {
-      loading.value = false;
-      _userData = value;
-      update();
-      Get.offAndToNamed(RoutesName.homeMainScreen);
+    await _api.updateProfileApi(data, _header).then((value) async {
+      Get.toNamed(RoutesName.homeMainScreen);
       Utils.snackBar("Profile Update", "Profile updated successfully",
           action: 'success');
-    }).onError((error, stackTrace) {
       loading.value = false;
       update();
+    }).onError((error, stackTrace) {
       var errorr = jsonDecode(error.toString());
-
-      Utils.snackBar("Error", errorr['username'][0], action: 'error');
+      String errorMessage = '';
+      for (var entry in errorr.entries) {
+        String fieldName = entry.key;
+        List<String> errorMessages = (entry.value as List).cast<String>();
+        errorMessage +=
+            '${capitalizeFirstLetter(fieldName)}: ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
+      }
+      Utils.snackBar('Error', errorMessage, action: 'error');
     });
+    loading.value = false;
+    update();
+    // }
+  }
+
+  String capitalizeFirstLetter(String input) {
+    if (input.isEmpty) {
+      return input;
+    }
+
+    return input[0].toUpperCase() + input.substring(1);
   }
 }

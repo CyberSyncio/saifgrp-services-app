@@ -19,6 +19,7 @@ class _AuthMainScreenState extends State<AuthMainScreen>
 
   @override
   void initState() {
+    @override
     AuthMainScreenController authController =
         Get.put(AuthMainScreenController());
 
