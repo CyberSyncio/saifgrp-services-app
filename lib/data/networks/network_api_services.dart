@@ -98,6 +98,8 @@ class NetworkApiService extends BaseApiServices {
         return responseJsn;
       case 400:
         throw InvalidUrlException(response.body);
+      case 401:
+        throw InvalidTokenException(response.body);
       case 500:
         throw ServerException();
       default:

@@ -32,9 +32,10 @@ class RequestController extends GetxController {
     if (checkLogin!) {
       _token = await _userToken.getToken();
     } else {
-      _token = _loginController.userToken;
+      _token = _loginController.userToken();
     }
-    buildingId = await _userToken.getBuildingId();
+
+    buildingId = await _userToken.getBuildingId() ?? "2";
     _header = {'authorization': 'Token $_token'};
     super.onInit();
   }
