@@ -9,18 +9,23 @@ class ServiceHistoryController extends GetxController {
   List requestList = [].obs;
   RxBool isLoading = true.obs;
   final StoreUserData _userToken = Get.put(StoreUserData());
-  final LoginController _loginController = Get.put(LoginController());
+  final LoginController _loginController = LoginController();
   Map<String, String> _header = {};
   String _token = '';
   bool? checkLogin;
   @override
   void onInit() async {
+    print(_loginController.usertoken.value.toString());
+    print(_loginController.check.value.toString());
     checkLogin = await _userToken.getLoginStatus();
     if (checkLogin!) {
       _token = await _userToken.getToken();
     } else {
-      _token = _loginController.userToken;
+      print(
+          "Value of Login Controller inside Servicce History${_loginController.userToken()}");
+      _token = _loginController.usertoken.value;
     }
+    print(_token);
 
     _header = {'authorization': 'Token $_token'};
 

@@ -30,7 +30,7 @@ class UpdateProfileController extends GetxController {
     if (checkLogin!) {
       _token = await _userToken.getToken();
     } else {
-      _token = _loginController.userToken;
+      _token = _loginController.userToken();
     }
     _header = {'authorization': 'Token $_token'};
     await getUserDetailApi();

@@ -21,7 +21,6 @@ class LoginController extends GetxController {
   final usertoken = ''.obs;
   final loading = false.obs;
   StoreUserData userData = Get.put(StoreUserData());
-
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
   final _api = LoginRepository();
@@ -34,17 +33,20 @@ class LoginController extends GetxController {
     };
     _api.loginApi(data).then((value) async {
       if (check.value) {
+        print("Inside if True status" + check.value.toString());
         await userData.login(value['key'], check.value);
       } else {
+        print("Inside if Else status" + check.value.toString());
         await userData.login('', check.value);
+        print(value['key'].toString());
         usertoken.value = value['key'].toString();
+        print('value of token in login Controller is ' + usertoken.value);
       }
-
+      print('Value of Check inside Login Controller' + check.value.toString());
       Get.offAllNamed(RoutesName.homeMainScreen);
       emailController.value.clear();
       passwordController.value.clear();
       loading.value = false;
-      print(userToken + "inside login ");
       update();
     }).onError((error, stackTrace) {
       loading.value = false;
@@ -84,5 +86,8 @@ class LoginController extends GetxController {
     });
   }
 
-  get userToken => usertoken.value;
+  String userToken() {
+    print(usertoken.value);
+    return usertoken.value;
+  }
 }

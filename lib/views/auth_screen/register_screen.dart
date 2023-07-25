@@ -15,6 +15,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   bool pass = true;
+  bool cpass = true;
   @override
   Widget build(BuildContext context) {
     double baseWidth = 428;
@@ -74,8 +75,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 child: TextFormField(
                                     controller:
-                                        controller.emailController.value,
+                                        controller.userNameController.value,
                                     focusNode: controller.emailFocusNode.value,
+                                    decoration: const InputDecoration(
+                                        hintText: 'User Name',
+                                        prefixIcon: Icon(Icons.person),
+                                        border: InputBorder.none)),
+                              ),
+                              Container(
+                                height: 60 * fem,
+                                width: 384 * fem,
+                                padding: const EdgeInsets.only(left: 7),
+                                margin: const EdgeInsets.only(top: 7),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10 * fem),
+                                  border: Border.all(
+                                      color: const Color(0xffd3d1d9)),
+                                ),
+                                child: TextFormField(
+                                    controller:
+                                        controller.emailController.value,
+                                    focusNode:
+                                        controller.passwordFocusNode.value,
                                     decoration: const InputDecoration(
                                         hintText: 'abc@gmail.com',
                                         prefixIcon: Icon(Icons.email_outlined),
@@ -95,8 +116,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: TextFormField(
                                     controller:
                                         controller.passwordController.value,
-                                    focusNode:
-                                        controller.passwordFocusNode.value,
+                                    focusNode: controller
+                                        .confirmPasswordFocusNode.value,
                                     obscureText: pass,
                                     decoration: InputDecoration(
                                         prefixIcon: const Icon(
@@ -110,6 +131,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               });
                                             },
                                             icon: Icon(pass
+                                                ? Icons.remove_red_eye_outlined
+                                                : Icons.remove_red_eye)),
+                                        border: InputBorder.none)),
+                              ),
+                              Container(
+                                height: 60 * fem,
+                                width: 384 * fem,
+                                padding: const EdgeInsets.only(left: 7),
+                                margin: const EdgeInsets.only(top: 7),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10 * fem),
+                                  border: Border.all(
+                                      color: const Color(0xffd3d1d9)),
+                                ),
+                                child: TextFormField(
+                                    controller: controller
+                                        .confirmPasswordController.value,
+                                    focusNode: controller
+                                        .confirmPasswordFocusNode.value,
+                                    obscureText: pass,
+                                    decoration: InputDecoration(
+                                        prefixIcon: const Icon(
+                                          Icons.key_outlined,
+                                        ),
+                                        hintText: 'Confirm Passwod',
+                                        suffixIcon: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                cpass = !cpass;
+                                              });
+                                            },
+                                            icon: Icon(cpass
                                                 ? Icons.remove_red_eye_outlined
                                                 : Icons.remove_red_eye)),
                                         border: InputBorder.none)),

@@ -36,7 +36,9 @@ class StoreUserData extends GetxController {
     isLoggedIn.value = check;
     token.value = userToken;
     loginStatus.value = check;
-
+    print('Value of Token inside StoreData is ${token.value}');
+    print(
+        'Vallue of Check Login Statusinside StoreData is ${loginStatus.value}');
     update();
   }
 

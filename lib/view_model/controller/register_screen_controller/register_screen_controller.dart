@@ -12,11 +12,12 @@ import '../user_session_controller/store_user_data.dart';
 
 class RegisterController extends GetxController {
 //>>>>>>>>>>>>>>>>>>>>>> EDITING CONTROLLER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
-
+  final userNameController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
   final emailFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
+  final confirmPasswordController = TextEditingController().obs;
   final confirmPasswordFocusNode = FocusNode().obs;
   final loading = false.obs;
   final dropDownValue = 'Select Your Residential'.obs;
@@ -27,6 +28,7 @@ class RegisterController extends GetxController {
   final AuthMainScreenController _mainScreenController =
       AuthMainScreenController();
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+
   final _api = RegisterRepository();
   final BuildingController _building = Get.put(BuildingController());
   @override
@@ -60,6 +62,7 @@ class RegisterController extends GetxController {
         //print(buildingDetails[i]['id'].toString());
         await _userDataController
             .storeBuildingId(buildingDetails[i]['id'].toString());
+        print(buildingDetails[i]['id'].toString());
       }
     }
   }
@@ -67,13 +70,11 @@ class RegisterController extends GetxController {
   void registerApi() {
     loading.value = true;
     update();
-    var userName = emailController.value.text.split('@');
-    var userName1 = userName[0];
     var data = {
-      "username": userName1,
+      "username": userNameController.value.text,
       "email": emailController.value.text,
       "password": passwordController.value.text,
-      "password2": passwordController.value.text,
+      "password2": confirmPasswordController.value.text,
       "building": buildingId.value
     };
 

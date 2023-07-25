@@ -25,6 +25,10 @@ class InvalidUrlException extends AppExceptions {
   InvalidUrlException([String? message]) : super(message);
 }
 
+class InvalidTokenException extends AppExceptions {
+  InvalidTokenException([String? message]) : super(message);
+}
+
 class FetchDataException extends AppExceptions {
   FetchDataException([String? message])
       : super(message, "Error while communication");
