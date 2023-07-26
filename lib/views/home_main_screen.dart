@@ -1,6 +1,6 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:myapp/utils/utils.dart';
 import 'package:myapp/views/home_screens/home_screen.dart';
 import 'package:myapp/views/home_screens/profile_screen/profile_screen.dart';

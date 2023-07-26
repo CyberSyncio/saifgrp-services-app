@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../../../repository/forget_password_repository/forget_passsword_repository.dart';
 import '../../../utils/utils.dart';
-
 
 class ForgetPasswordController extends GetxController {
 //>>>>>>>>>>>>>>>>>>>>>> EDITING CONTROLLER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -31,7 +32,7 @@ class ForgetPasswordController extends GetxController {
     }).onError((error, stackTrace) {
       var errorr = jsonDecode(error.toString());
       loading.value = false;
-      print(errorr);
+
       Utils.snackBar(
           "Error",
           emailController.value.text.isEmpty

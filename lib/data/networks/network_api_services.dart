@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -51,7 +53,6 @@ class NetworkApiService extends BaseApiServices {
       final response = await http
           .post(Uri.parse(url), headers: header, body: data)
           .timeout(const Duration(seconds: 10));
-      print('response for put api is ${response.statusCode}');
 
       responseJson = returnResponseJson(response);
     } on SocketException {
@@ -77,7 +78,7 @@ class NetworkApiService extends BaseApiServices {
       final response = await http
           .put(Uri.parse(url), headers: header, body: data)
           .timeout(const Duration(seconds: 10));
-      print('response for put api is ${response.statusCode}');
+
       responseJson = returnResponseJson(response);
     } on SocketException {
       throw InternetException();

@@ -25,7 +25,6 @@ class _AuthMainScreenState extends State<AuthMainScreen>
 
     tabController = TabController(
         initialIndex: authController.getIndex, length: 2, vsync: this);
-    // TODO: implement initState
     super.initState();
   }
 

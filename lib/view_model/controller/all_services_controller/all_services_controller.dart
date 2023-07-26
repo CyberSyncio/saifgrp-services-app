@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:get/get.dart';
 import '../../../repository/all_services_repository/all_services_repository.dart';
 

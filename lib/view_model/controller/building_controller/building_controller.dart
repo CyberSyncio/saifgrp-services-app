@@ -23,7 +23,7 @@ class BuildingController extends GetxController {
     buildingModel = await _buildingRepo.getAllBuildings();
     isLoading = false.obs;
     isRefresh = false.obs;
-    print(buildingModel);
+
     update();
   }
 }

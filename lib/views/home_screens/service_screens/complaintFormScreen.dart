@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: file_names, unused_element
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -36,11 +36,11 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
         body: Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(color: Color(0x7f000000)),
-        color: Color(0xffffffff),
+        border: Border.all(color: const Color(0x7f000000)),
+        color: const Color(0xffffffff),
         boxShadow: [
           BoxShadow(
-            color: Color(0x3f000000),
+            color: const Color(0x3f000000),
             offset: Offset(0 * fem, 4 * fem),
             blurRadius: 2 * fem,
           ),
@@ -52,7 +52,7 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
           Container(
             width: double.infinity,
             height: ffem * 200,
-            padding: EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 20),
             decoration: const BoxDecoration(
               color: Color(0xff436eee),
             ),
@@ -145,23 +145,23 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
                                     fontSize: 15 * ffem,
                                     fontWeight: FontWeight.w600,
                                     height: 1.2175 * ffem / fem,
-                                    color: Color(0xff000000),
+                                    color: const Color(0xff000000),
                                   ),
                                 ),
                                 Container(
                                   height: 60 * fem,
-                                  padding: EdgeInsets.only(left: 7),
-                                  margin: EdgeInsets.only(top: 7),
+                                  padding: const EdgeInsets.only(left: 7),
+                                  margin: const EdgeInsets.only(top: 7),
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.circular(10 * fem),
-                                    border:
-                                        Border.all(color: Color(0xffd3d1d9)),
+                                    border: Border.all(
+                                        color: const Color(0xffd3d1d9)),
                                   ),
                                   child: TextFormField(
                                     readOnly: true,
                                     controller: dateinput,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                         suffixIcon:
                                             Icon(Icons.date_range_outlined),
                                         border: InputBorder.none),
@@ -222,7 +222,7 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
                                 ],
                               ),
                               child: controller.loading.value
-                                  ? Center(
+                                  ? const Center(
                                       child: SpinKitCircle(
                                           size: 24, color: Colors.white))
                                   : Text(
