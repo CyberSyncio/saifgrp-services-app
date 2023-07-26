@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -81,7 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 prefixIcon: Icon(Icons.email_outlined),
                                 border: InputBorder.none)),
                       ),
-                      SizedBox(height: 20 * fem),
                       Container(
                         height: 60 * fem,
                         width: 384 * fem,

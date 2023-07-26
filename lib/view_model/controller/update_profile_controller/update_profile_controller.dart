@@ -36,7 +36,6 @@ class UpdateProfileController extends GetxController {
     userNameController.value.clear();
     firstNameController.value.clear();
     lastNameController.value.clear();
-    print('data is cleared');
   }
 
   getUserDetailApi() {

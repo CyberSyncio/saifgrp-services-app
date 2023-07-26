@@ -51,7 +51,7 @@ class LoginController extends GetxController {
         errorMessage +=
             '${capitalizeFirstLetter(fieldName)}${entry.key == 'non_field_errors' ? '' : ':'} ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
       }
-      print(errorMessage);
+
       Utils.snackBar('Error', errorMessage, action: 'error');
       loading.value = false;
       update();

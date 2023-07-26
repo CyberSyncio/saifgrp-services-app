@@ -118,6 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     focusNode:
                                         controller.passwordFocusNode.value,
                                     obscureText: pass,
+                                    textAlignVertical: TextAlignVertical.center,
                                     decoration: InputDecoration(
                                         prefixIcon: const Icon(
                                           Icons.key_outlined,
@@ -149,19 +150,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         .confirmPasswordController.value,
                                     focusNode: controller
                                         .confirmPasswordFocusNode.value,
-                                    obscureText: pass,
+                                    obscureText: cpass,
+                                    textAlignVertical: TextAlignVertical.center,
                                     decoration: InputDecoration(
                                         prefixIcon: const Icon(
                                           Icons.key_outlined,
                                         ),
-                                        hintText: 'Confirm Passwod',
+                                        hintText: 'Confirm password',
                                         suffixIcon: IconButton(
                                             onPressed: () {
                                               setState(() {
                                                 cpass = !cpass;
                                               });
                                             },
-                                            icon: Icon(cpass
+                                            icon: Icon(pass
                                                 ? Icons.remove_red_eye_outlined
                                                 : Icons.remove_red_eye)),
                                         border: InputBorder.none)),

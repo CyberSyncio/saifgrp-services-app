@@ -26,7 +26,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.welcomeScreen,
-          page: () => WelcomeScreen(),
+          page: () => const WelcomeScreen(),
         ),
         GetPage(
           name: RoutesName.homeMainScreen,

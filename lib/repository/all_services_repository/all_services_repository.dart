@@ -6,7 +6,7 @@ class ServicesRepository {
 
   getServices() async {
     var response = await _apiServices.getApi(url: AppUrl.serviceUrl);
-    print(response.toString());
+
     return response;
   }
 }

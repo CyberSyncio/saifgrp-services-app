@@ -66,7 +66,6 @@ class RegisterController extends GetxController {
         //print(buildingDetails[i]['id'].toString());
         await _userDataController
             .storeBuildingId(buildingDetails[i]['id'].toString());
-        print(buildingDetails[i]['id'].toString());
       }
     }
   }
@@ -99,7 +98,6 @@ class RegisterController extends GetxController {
         List<String> errorMessages = (entry.value as List).cast<String>();
         errorMessage +=
             '${capitalizeFirstLetter(fieldName)}: ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
-        print(errorMessage);
       }
       Utils.snackBar('Error', errorMessage, action: 'error');
     });

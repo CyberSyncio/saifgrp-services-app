@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 class AppExceptions implements Exception {
   final String? _message;
   final String? _prefix;
