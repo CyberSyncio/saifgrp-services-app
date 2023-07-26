@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:myapp/utils/app_url/app_url.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/utils.dart';
 import '../../view_model/controller/login controller/login_screen_controller.dart';
 
@@ -157,26 +158,31 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                           )),
-                      SizedBox(height: 20 * fem),
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              // Add your URL here
-                              String url = AppUrl.resetWebUrl;
-                            },
-                            child: Text(
-                              'Forgot password?',
-                              style: SafeGoogleFont(
-                                'montserrat',
-                                fontSize: 14 * ffem,
-                                fontWeight: FontWeight.w500,
-                                height: 1.2125 * ffem / fem,
-                                color: const Color(0xff436eee),
+                      SizedBox(height: 10 * fem),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                // Add your URL here
+                                String url = AppUrl.resetWebUrl;
+                                launch(url);
+                              },
+                              child: Text(
+                                'Forgot password?',
+                                style: SafeGoogleFont(
+                                  'montserrat',
+                                  fontSize: 14 * ffem,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.2125 * ffem / fem,
+                                  color: const Color(0xff436eee),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     ],
                   ),
