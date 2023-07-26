@@ -63,7 +63,6 @@ class RegisterController extends GetxController {
     for (int i = 0; i < buildingDetails.length; i++) {
       if (dropDownValue.value == buildingDetails[i]['name']) {
         buildingId.value = buildingDetails[i]['id'].toString();
-        //print(buildingDetails[i]['id'].toString());
         await _userDataController
             .storeBuildingId(buildingDetails[i]['id'].toString());
       }
@@ -92,7 +91,6 @@ class RegisterController extends GetxController {
     }).onError((error, stackTrace) {
       var errorr = jsonDecode(error.toString());
       String errorMessage = '';
-
       for (var entry in errorr.entries) {
         String fieldName = entry.key;
         List<String> errorMessages = (entry.value as List).cast<String>();

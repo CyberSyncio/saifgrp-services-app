@@ -114,51 +114,45 @@ class _LoginScreenState extends State<LoginScreen> {
                                 border: InputBorder.none)),
                       ),
                       SizedBox(height: 30 * fem),
-                      InkWell(
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              if (controller
-                                      .emailController.value.text.isEmpty &&
-                                  controller
-                                      .passwordController.value.text.isEmpty) {
-                                Utils.snackBar('Error',
-                                    'Field Must include "email" and "password',
-                                    action: 'error');
+                      Obx(
+                        () => InkWell(
+                            onTap: () {
+                              if (controller.loading.value) {
                               } else {
                                 controller.loginApi();
                               }
-                            }
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: 384 * fem,
-                            height: 45 * fem,
-                            decoration: BoxDecoration(
-                              color: const Color(0xff436eee),
-                              borderRadius: BorderRadius.circular(10 * fem),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color(0x3f000000),
-                                  offset: Offset(0 * fem, 4 * fem),
-                                  blurRadius: 2 * fem,
-                                ),
-                              ],
-                            ),
-                            child: controller.loading.value
-                                ? const Center(
-                                    child: SpinKitCircle(
-                                        size: 24, color: Colors.white))
-                                : Text(
-                                    'Login',
-                                    style: SafeGoogleFont(
-                                      'montserrat',
-                                      fontSize: 18 * ffem,
-                                      fontWeight: FontWeight.w800,
-                                      height: 1.2125 * ffem / fem,
-                                      color: const Color(0xffffffff),
-                                    ),
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: 384 * fem,
+                              height: 45 * fem,
+                              decoration: BoxDecoration(
+                                color: const Color(0xff436eee),
+                                borderRadius: BorderRadius.circular(10 * fem),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(0x3f000000),
+                                    offset: Offset(0 * fem, 4 * fem),
+                                    blurRadius: 2 * fem,
                                   ),
-                          )),
+                                ],
+                              ),
+                              child: controller.loading.value
+                                  ? const Center(
+                                      child: SpinKitCircle(
+                                          size: 24, color: Colors.white))
+                                  : Text(
+                                      'Login',
+                                      style: SafeGoogleFont(
+                                        'montserrat',
+                                        fontSize: 18 * ffem,
+                                        fontWeight: FontWeight.w800,
+                                        height: 1.2125 * ffem / fem,
+                                        color: const Color(0xffffffff),
+                                      ),
+                                    ),
+                            )),
+                      ),
                       SizedBox(height: 10 * fem),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

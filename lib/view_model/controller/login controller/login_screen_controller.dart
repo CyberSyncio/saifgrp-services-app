@@ -19,22 +19,18 @@ class LoginController extends GetxController {
   final passwordFocusNode = FocusNode().obs;
   var usertoken = ''.obs;
   final loading = false.obs;
-
   StoreUserData userData = Get.put(StoreUserData());
-  // final ServiceHistoryController _serviceController =
-  //     Get.put(ServiceHistoryController());
-
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
   final _api = LoginRepository();
-  loginApi() {
+  loginApi() async {
     loading.value = true;
     update();
     var data = {
       "email": emailController.value.text,
       "password": passwordController.value.text
     };
-    _api.loginApi(data).then((value) async {
+    await _api.loginApi(data).then((value) async {
       await userData.login(value['key']);
       Get.offAndToNamed(RoutesName.homeMainScreen, arguments: usertoken.value);
       emailController.value.clear();
@@ -44,21 +40,17 @@ class LoginController extends GetxController {
     }).onError((error, stackTrace) {
       var errorr = jsonDecode(error.toString());
       String errorMessage = '';
-
       for (var entry in errorr.entries) {
         String fieldName = entry.key == 'non_field_errors' ? '' : entry.key;
         List<String> errorMessages = (entry.value as List).cast<String>();
         errorMessage +=
             '${capitalizeFirstLetter(fieldName)}${entry.key == 'non_field_errors' ? '' : ':'} ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
       }
-
       Utils.snackBar('Error', errorMessage, action: 'error');
-      loading.value = false;
-      update();
     });
     loading.value = false;
+    passwordController.value.clear();
     update();
-    // }
   }
 
   String capitalizeFirstLetter(String input) {

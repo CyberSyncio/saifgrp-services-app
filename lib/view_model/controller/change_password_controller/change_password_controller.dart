@@ -37,6 +37,8 @@ class ChangePasswordController extends GetxController {
       {
         Utils.snackBar('Successfully', value['detail'], action: "success");
         loading.value = false;
+        passwordController.value.clear();
+        confirmPasswordController.value.clear();
         update();
       }
     }).onError((error, stackTrace) {
@@ -44,12 +46,20 @@ class ChangePasswordController extends GetxController {
       String errorMessage = '';
       for (var entry in errorr.entries) {
         String fieldName = entry.key == 'non_field_errors' ? '' : entry.key;
-        List<String> errorMessages = (entry.value as List).cast<String>();
+        List<String> errorMessages = [];
+
+        if (entry.value.toString().contains('didnât')) {
+          errorMessages.add('The two password fields did not match.');
+        } else {
+          errorMessages = (entry.value as List).cast<String>();
+        }
         errorMessage +=
             '${capitalizeFirstLetter(fieldName)}${entry.key == 'non_field_errors' ? '' : ':'} ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
       }
       Utils.snackBar('Error', errorMessage, action: 'error');
       loading.value = false;
+      passwordController.value.clear();
+      confirmPasswordController.value.clear();
       update();
     });
     loading.value = false;

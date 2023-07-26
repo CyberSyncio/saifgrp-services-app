@@ -1,5 +1,3 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
 import 'package:myapp/utils/utils.dart';
 import 'package:myapp/views/home_screens/home_screen.dart';
@@ -41,9 +39,6 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 428;
-    double fem = MediaQuery.of(context).size.width / baseWidth;
-
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: const Color(0xff436eee),

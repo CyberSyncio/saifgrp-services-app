@@ -2,11 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-
 import 'package:http/http.dart' as http;
-
 import '../app_exceptions.dart';
 import 'base_api_services.dart';
 
@@ -18,9 +14,6 @@ class NetworkApiService extends BaseApiServices {
     required String url,
     Map<String, String>? header,
   }) async {
-    if (kDebugMode) {
-      print("The GetApi url is for testing :$url");
-    }
     dynamic responseJson;
     try {
       final response = await http
@@ -45,9 +38,6 @@ class NetworkApiService extends BaseApiServices {
       {required dynamic data,
       Map<String, String>? header,
       required String url}) async {
-    if (kDebugMode) {
-      print("The PostApi url is for testing :$url and Data is $data");
-    }
     dynamic responseJson;
     try {
       final response = await http
@@ -70,9 +60,6 @@ class NetworkApiService extends BaseApiServices {
       {required dynamic data,
       Map<String, String>? header,
       required String url}) async {
-    if (kDebugMode) {
-      print("The PutApi url is for testing :$url and Data is $data");
-    }
     dynamic responseJson;
     try {
       final response = await http
@@ -85,7 +72,6 @@ class NetworkApiService extends BaseApiServices {
     } on RequestTimout {
       throw RequestTimout();
     }
-    //print(responseJson);
     return responseJson;
   }
 
