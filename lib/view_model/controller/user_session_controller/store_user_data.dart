@@ -8,7 +8,7 @@ class StoreUserData extends GetxController {
   final RxBool isLoggedIn = false.obs;
   final RxString token = ''.obs;
   final RxString buildingId = ''.obs;
-  final RxBool loginStatus = false.obs;
+
   @override
   void onInit() async {
     _preferences = await SharedPreferences.getInstance();
@@ -23,22 +23,17 @@ class StoreUserData extends GetxController {
     isLoggedIn.value = _preferences!.getBool('isLoggedIn') ?? false;
     if (isLoggedIn.value) {
       token.value = _preferences!.getString('token') ?? '';
-      loginStatus.value = _preferences!.getBool('checkStatus') ?? false;
     }
     update();
   }
 
-  Future<void> login(String userToken, bool check) async {
+  Future<void> login(String userToken) async {
     _preferences = await SharedPreferences.getInstance();
-    await _preferences!.setBool('isLoggedIn', check);
-    await _preferences!.setBool('checkStatus', check);
+    await _preferences!.setBool('isLoggedIn', true);
     await _preferences!.setString('token', userToken);
-    isLoggedIn.value = check;
+    isLoggedIn.value = true;
     token.value = userToken;
-    loginStatus.value = check;
-    print('Value of Token inside StoreData is ${token.value}');
-    print(
-        'Vallue of Check Login Statusinside StoreData is ${loginStatus.value}');
+
     update();
   }
 
@@ -48,7 +43,6 @@ class StoreUserData extends GetxController {
     await _preferences!.remove('token');
     isLoggedIn.value = false;
     token.value = '';
-    loginStatus.value = false;
     update();
   }
 
@@ -62,13 +56,6 @@ class StoreUserData extends GetxController {
     _preferences = await SharedPreferences.getInstance();
     token.value = _preferences!.getString('token')!;
     return token.value;
-  }
-
-  Future<bool> getLoginStatus() async {
-    _preferences = await SharedPreferences.getInstance();
-    loginStatus.value = _preferences!.getBool('checkStatus')!;
-
-    return loginStatus.value;
   }
 
   Future<String> getBuildingId() async {

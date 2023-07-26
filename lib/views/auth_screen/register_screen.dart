@@ -76,7 +76,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: TextFormField(
                                     controller:
                                         controller.userNameController.value,
-                                    focusNode: controller.emailFocusNode.value,
+                                    focusNode:
+                                        controller.userNameFocusNode.value,
                                     decoration: const InputDecoration(
                                         hintText: 'User Name',
                                         prefixIcon: Icon(Icons.person),
@@ -95,14 +96,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: TextFormField(
                                     controller:
                                         controller.emailController.value,
-                                    focusNode:
-                                        controller.passwordFocusNode.value,
+                                    focusNode: controller.emailFocusNode.value,
                                     decoration: const InputDecoration(
                                         hintText: 'abc@gmail.com',
                                         prefixIcon: Icon(Icons.email_outlined),
                                         border: InputBorder.none)),
                               ),
-                              SizedBox(height: 20 * fem),
                               Container(
                                 height: 60 * fem,
                                 width: 384 * fem,
@@ -116,8 +115,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: TextFormField(
                                     controller:
                                         controller.passwordController.value,
-                                    focusNode: controller
-                                        .confirmPasswordFocusNode.value,
+                                    focusNode:
+                                        controller.passwordFocusNode.value,
                                     obscureText: pass,
                                     decoration: InputDecoration(
                                         prefixIcon: const Icon(
@@ -167,7 +166,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 : Icons.remove_red_eye)),
                                         border: InputBorder.none)),
                               ),
-                              SizedBox(height: 20 * fem),
                               Container(
                                 height: 60 * fem,
                                 width: 384 * fem,
@@ -207,12 +205,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               SizedBox(height: 30 * fem),
                               InkWell(
-                                onTap: controller.loading.value
-                                    ? null
-                                    : () {
-                                        controller.getBuildingId();
-                                        controller.registerApi();
-                                      },
+                                onTap: () {
+                                  if (controller.loading.value) {
+                                  } else {
+                                    controller.getBuildingId();
+                                    controller.registerApi();
+                                  }
+                                },
                                 child: Container(
                                   alignment: Alignment.center,
                                   width: 384 * fem,

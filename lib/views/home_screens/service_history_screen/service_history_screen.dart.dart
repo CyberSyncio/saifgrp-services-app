@@ -94,6 +94,8 @@ class ServiceHistoryScreen extends StatelessWidget {
                                     subtitle: DateFormat('dd-MM-yyyy').format(
                                         DateTime.parse(controller
                                             .requestList[index]['created_on'])),
+                                    description: controller.requestList[index]
+                                        ['description'],
                                   );
                                 },
                               );
