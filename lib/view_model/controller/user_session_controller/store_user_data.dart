@@ -7,7 +7,6 @@ class StoreUserData extends GetxController {
   SharedPreferences? _buildingPreference;
   final RxBool isLoggedIn = false.obs;
   final RxString token = ''.obs;
-  final RxString buildingId = ''.obs;
 
   @override
   void onInit() async {
@@ -56,11 +55,5 @@ class StoreUserData extends GetxController {
     _preferences = await SharedPreferences.getInstance();
     token.value = _preferences!.getString('token')!;
     return token.value;
-  }
-
-  Future<String> getBuildingId() async {
-    _buildingPreference = await SharedPreferences.getInstance();
-    buildingId.value = _buildingPreference!.getString('buildingId')!;
-    return buildingId.value;
   }
 }

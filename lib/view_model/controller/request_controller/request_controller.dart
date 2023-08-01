@@ -1,12 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../repository/request_repository/request_repository.dart';
 import '../../../utils/routes/routes_name.dart';
 import '../../../utils/utils.dart';
 import '../user_session_controller/store_user_data.dart';
+
 
 class RequestController extends GetxController {
   final nameController = TextEditingController().obs;
@@ -17,22 +16,18 @@ class RequestController extends GetxController {
   final flatNoFocusNode = FocusNode().obs;
   final phoneNoController = TextEditingController().obs;
   final phoneNoFocusNode = FocusNode().obs;
-
   final StoreUserData _userToken = Get.put(StoreUserData());
   Map<String, String>? _header;
   String? _token;
   final loading = false.obs;
   final _api = RequestRepository();
   dynamic argumentData = Get.arguments;
-  String buildingId = '';
   bool? checkLogin;
   final oneTimeToken = ''.obs;
   @override
   onInit() async {
     _token = await _userToken.getToken();
     _header = {'authorization': 'Token $_token'};
-    buildingId = await _userToken.getBuildingId();
-
     super.onInit();
   }
 
@@ -41,7 +36,6 @@ class RequestController extends GetxController {
     update();
     var data = {
       "service": argumentData.toString(),
-      "building": buildingId,
       "flat_number": flatNoController.value.text,
       "phone_number": phoneNoController.value.text,
       "description": descriptionController.value.text,
@@ -86,4 +80,6 @@ class RequestController extends GetxController {
   setOneTimeToken(String token) {
     oneTimeToken.value = token;
   }
+
+  
 }

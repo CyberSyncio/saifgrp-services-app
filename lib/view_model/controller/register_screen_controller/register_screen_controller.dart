@@ -8,7 +8,6 @@ import '../../../repository/register_repository/register_repository.dart';
 import '../../../utils/utils.dart';
 import '../auth_controller/auth_controller.dart';
 import '../building_controller/building_controller.dart';
-import '../user_session_controller/store_user_data.dart';
 
 class RegisterController extends GetxController {
 //>>>>>>>>>>>>>>>>>>>>>> EDITING CONTROLLER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -22,10 +21,9 @@ class RegisterController extends GetxController {
   final confirmPasswordFocusNode = FocusNode().obs;
   final loading = false.obs;
   final dropDownValue = 'Select Your Residential'.obs;
-  var buildingId = ''.obs;
   List buildingDetails = [].obs;
   List<String> buildingList = [];
-  final StoreUserData _userDataController = StoreUserData();
+  final buildingId = ''.obs;
   final AuthMainScreenController _mainScreenController =
       AuthMainScreenController();
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -57,14 +55,13 @@ class RegisterController extends GetxController {
     for (var i = 0; i < buildingDetails.length; i++) {
       buildingList.add(buildingDetails[i]['name']);
     }
+    getBuildingId();
   }
 
   getBuildingId() async {
     for (int i = 0; i < buildingDetails.length; i++) {
       if (dropDownValue.value == buildingDetails[i]['name']) {
         buildingId.value = buildingDetails[i]['id'].toString();
-        await _userDataController
-            .storeBuildingId(buildingDetails[i]['id'].toString());
       }
     }
   }
@@ -107,35 +104,6 @@ class RegisterController extends GetxController {
     if (input.isEmpty) {
       return input;
     }
-
     return input[0].toUpperCase() + input.substring(1);
   }
 }
-
-
-
-
-   // print(errorr);
-      // if (userNameController.value.text.isEmpty &&
-      //     emailController.value.text.isEmpty &&
-      //     passwordController.value.text.isEmpty &&
-      //     dropDownValue.value.contains('Select Your Residential')) {
-      //   Utils.snackBar('Error', " All fields are required", action: 'error');
-      // } else if (emailController.value.text.isEmpty &&
-      //     passwordController.value.text.isEmpty &&
-      //     confirmPasswordController.value.text.isEmpty &&
-      //     dropDownValue.value.contains('Select Your Residential')) {
-      //   Utils.snackBar('Error',
-      //       "Email: ${errorr['email'][0]} \nPassword: ${errorr['password'][0]} \nConfirm Password: ${errorr['password2'][0]} \nBuilding: ${errorr['building'][0]}",
-      //       action: 'error');
-      // } else if (confirmPasswordController.value.text.isEmpty) {
-      //   Utils.snackBar(
-      //       'Error', "Confirm Password: ${errorr['new_password2'][0]}",
-      //       action: 'error');
-      // } else if (confirmPasswordController.value.text !=
-      //     passwordController.value.text) {
-      //   Utils.snackBar('Error', "New Password: ${errorr['new_password2'][0]}",
-      //       action: 'error');
-      // } else {
-
-      //  }
