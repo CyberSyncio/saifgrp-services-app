@@ -8,6 +8,7 @@ class ServiceHistoryController extends GetxController {
   final _requestHistory = ServiceHistoryRepository();
   List requestList = [].obs;
   RxBool isLoading = true.obs;
+  RxString connect = ''.obs;
   final StoreUserData _userToken = Get.put(StoreUserData());
 
   Map<String, String> _header = {};
@@ -25,9 +26,16 @@ class ServiceHistoryController extends GetxController {
   }
 
   getRequestHistory() async {
-    requestList = await _requestHistory.requestHistory(_header);
-    isLoading.value = false;
-    update();
+    try {
+      requestList = await _requestHistory.requestHistory(_header);
+      isLoading.value = false;
+      connect.value = 'yes';
+      update();
+    } catch (e) {
+      isLoading.value = false;
+      connect.value = 'no';
+      update();
+    }
   }
 
   setOneTimeToken(String token) {

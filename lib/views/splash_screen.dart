@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
             width: 266.94 * fem,
             height: 267.93 * fem,
             child: Image.asset(
-              'assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-Kjw.png',
+              'assets/saiflogooo.png',
             ),
           ),
         ),

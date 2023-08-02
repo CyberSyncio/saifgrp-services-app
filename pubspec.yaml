@@ -29,21 +29,21 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^2.0.0
+  flutter_spinkit: ^5.2.0
   get: ^4.6.5
   google_fonts: ^5.1.0
   intl: ^0.18.1
   shared_preferences: ^2.2.0
   url_launcher: ^6.1.12
-  flutter_lints: ^2.0.0
-  flutter_launcher_icons: ^0.13.1
-  flutter_spinkit: ^5.2.0
+  connectivity_plus: ^4.0.1
 
 dev_dependencies:
+  
 
 flutter_icons:
   android: true
@@ -85,14 +85,7 @@ flutter:
     - assets/page-1/images/rectangle-41-br1.png
     - assets/page-1/images/wifi-icon-1uj.png
     - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-cM7.png
-    - assets/page-1/images/image-5-dvy.png
-    - assets/page-1/images/batery-icon.png
-    - assets/page-1/images/image-4-TUd.png
-    - assets/page-1/images/vector-ajb.png
-    - assets/page-1/images/batery-icon-zB3.png
     - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-3CM.png
-    - assets/page-1/images/image-5-K21.png
-    - assets/page-1/images/image-7.png
     - assets/page-1/images/e88750-59a0-4195-99e9-a2554d3ed0e9-removebg-preview-1-39b.png
     - assets/page-1/images/unsplash-1c8sj2io2i4-bg-ZsF.png
     - assets/page-1/images/wifi-icon-Z5s.png
@@ -104,16 +97,8 @@ flutter:
     - assets/page-1/images/batery-icon-r5o.png
     - assets/page-1/images/image-6-4BB.png
     - assets/page-1/images/rectangle-41-U3s.png
-    - assets/page-1/images/batery-icon-PUD.png
-    - assets/page-1/images/image-14.png
-    - assets/page-1/images/image-6-uNZ.png
-    - assets/page-1/images/image-4-oVB.png
-    - assets/page-1/images/vector-hgM.png
     - assets/page-1/images/group-12-Tso.png
-    - assets/page-1/images/batery-icon-Z69.png
-    - assets/page-1/images/wifi-icon-tZP.png
-    - assets/page-1/images/vector-4Zf.png
-    - assets/page-1/images/image-7-MHB.png
+    - assets/saiflogooo.png
     - assets/page-1/images/back-button.png
     - assets/page-1/images/image-7-CDo.png
     - assets/page-1/images/user.png

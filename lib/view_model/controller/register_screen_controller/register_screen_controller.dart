@@ -8,6 +8,7 @@ import '../../../repository/register_repository/register_repository.dart';
 import '../../../utils/utils.dart';
 import '../auth_controller/auth_controller.dart';
 import '../building_controller/building_controller.dart';
+import '../internet_connectivity_controller/internet_connectivity_controller.dart';
 
 class RegisterController extends GetxController {
 //>>>>>>>>>>>>>>>>>>>>>> EDITING CONTROLLER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
@@ -26,6 +27,8 @@ class RegisterController extends GetxController {
   final buildingId = ''.obs;
   final AuthMainScreenController _mainScreenController =
       AuthMainScreenController();
+  InternetConnectivityController connectivityController =
+      Get.put(InternetConnectivityController()).obs();
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
   final _api = RegisterRepository();
@@ -66,38 +69,45 @@ class RegisterController extends GetxController {
     }
   }
 
-  void registerApi() async {
-    loading.value = true;
-    update();
-    var data = {
-      "username": userNameController.value.text,
-      "email": emailController.value.text,
-      "password": passwordController.value.text,
-      "password2": confirmPasswordController.value.text,
-      "building": buildingId.value
-    };
-    await _api.registerApi(data).then((value) {
-      Utils.snackBar("Registration ", "Successfully Registered",
-          action: "success");
-      emailController.value.clear();
-      passwordController.value.clear();
-      _mainScreenController.setIndex(0);
-      Get.offAllNamed(RoutesName.authMainScreen);
+  registerApi() async {
+    try {
+      loading.value = true;
+      update();
+      var data = {
+        "username": userNameController.value.text,
+        "email": emailController.value.text,
+        "password": passwordController.value.text,
+        "password2": confirmPasswordController.value.text,
+        "building": buildingId.value
+      };
+      await _api.registerApi(data).then((value) {
+        Utils.snackBar("Registration ", "Successfully Registered",
+            action: "success");
+        emailController.value.clear();
+        passwordController.value.clear();
+        _mainScreenController.setIndex(0);
+        Get.offAllNamed(RoutesName.authMainScreen);
+        loading.value = false;
+        update();
+      }).onError((error, stackTrace) {
+        var errorr = jsonDecode(error.toString());
+        String errorMessage = '';
+        for (var entry in errorr.entries) {
+          String fieldName = entry.key;
+          List<String> errorMessages = (entry.value as List).cast<String>();
+          errorMessage +=
+              '${capitalizeFirstLetter(fieldName)}: ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
+        }
+        Utils.snackBar('Error', errorMessage, action: 'error');
+      });
       loading.value = false;
       update();
-    }).onError((error, stackTrace) {
-      var errorr = jsonDecode(error.toString());
-      String errorMessage = '';
-      for (var entry in errorr.entries) {
-        String fieldName = entry.key;
-        List<String> errorMessages = (entry.value as List).cast<String>();
-        errorMessage +=
-            '${capitalizeFirstLetter(fieldName)}: ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
-      }
-      Utils.snackBar('Error', errorMessage, action: 'error');
-    });
-    loading.value = false;
-    update();
+    } catch (e) {
+      Utils.snackBar('Error', 'Check your internet connection and try again',
+          action: 'error');
+      loading.value = false;
+      update();
+    }
   }
 
   String capitalizeFirstLetter(String input) {

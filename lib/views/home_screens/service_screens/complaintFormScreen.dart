@@ -200,41 +200,44 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
                             focusNode: controller.descriptionFocusNode.value,
                           ),
                           SizedBox(height: 30 * ffem),
-                          InkWell(
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                controller.requestApi();
-                              }
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              width: 360 * fem,
-                              height: 45 * fem,
-                              decoration: BoxDecoration(
-                                color: const Color(0xff436eee),
-                                borderRadius: BorderRadius.circular(10 * fem),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0x3f000000),
-                                    offset: Offset(0 * fem, 4 * fem),
-                                    blurRadius: 2 * fem,
-                                  ),
-                                ],
-                              ),
-                              child: controller.loading.value
-                                  ? const Center(
-                                      child: SpinKitCircle(
-                                          size: 24, color: Colors.white))
-                                  : Text(
-                                      'Submit',
-                                      style: SafeGoogleFont(
-                                        'Montserrat',
-                                        fontSize: 18 * ffem,
-                                        fontWeight: FontWeight.w800,
-                                        height: 1.2175 * ffem / fem,
-                                        color: const Color(0xffffffff),
-                                      ),
+                          Obx(
+                            () => InkWell(
+                              onTap: () async {
+                                if (controller.loading.value) {
+                                } else {
+                                  await controller.requestApi();
+                                }
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: 360 * fem,
+                                height: 45 * fem,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xff436eee),
+                                  borderRadius: BorderRadius.circular(10 * fem),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color(0x3f000000),
+                                      offset: Offset(0 * fem, 4 * fem),
+                                      blurRadius: 2 * fem,
                                     ),
+                                  ],
+                                ),
+                                child: controller.loading.value
+                                    ? const Center(
+                                        child: SpinKitCircle(
+                                            size: 24, color: Colors.white))
+                                    : Text(
+                                        'Submit',
+                                        style: SafeGoogleFont(
+                                          'Montserrat',
+                                          fontSize: 18 * ffem,
+                                          fontWeight: FontWeight.w800,
+                                          height: 1.2175 * ffem / fem,
+                                          color: const Color(0xffffffff),
+                                        ),
+                                      ),
+                              ),
                             ),
                           ),
                         ],

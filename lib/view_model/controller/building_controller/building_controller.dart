@@ -20,10 +20,17 @@ class BuildingController extends GetxController {
   }
 
   getBuilding() async {
-    buildingModel = await _buildingRepo.getAllBuildings();
-    isLoading = false.obs;
-    isRefresh = false.obs;
+    try {
+      buildingModel = await _buildingRepo.getAllBuildings();
+      isLoading = false.obs;
+      isRefresh = false.obs;
 
-    update();
+      update();
+    } catch (e) {
+      isLoading = false.obs;
+      isRefresh = false.obs;
+
+      update();
+    }
   }
 }

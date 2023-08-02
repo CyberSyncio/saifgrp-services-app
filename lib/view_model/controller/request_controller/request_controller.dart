@@ -6,7 +6,6 @@ import '../../../utils/routes/routes_name.dart';
 import '../../../utils/utils.dart';
 import '../user_session_controller/store_user_data.dart';
 
-
 class RequestController extends GetxController {
   final nameController = TextEditingController().obs;
   final nameFocusNode = FocusNode().obs;
@@ -19,7 +18,7 @@ class RequestController extends GetxController {
   final StoreUserData _userToken = Get.put(StoreUserData());
   Map<String, String>? _header;
   String? _token;
-  final loading = false.obs;
+  RxBool loading = false.obs;
   final _api = RequestRepository();
   dynamic argumentData = Get.arguments;
   bool? checkLogin;
@@ -32,7 +31,7 @@ class RequestController extends GetxController {
   }
 
   requestApi() async {
-    final loading = true.obs;
+    loading = true.obs;
     update();
     var data = {
       "service": argumentData.toString(),
@@ -61,8 +60,6 @@ class RequestController extends GetxController {
             '${capitalizeFirstLetter(fieldName)}: ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
       }
       Utils.snackBar('Error', errorMessage, action: 'error');
-      loading.value = false;
-      update();
     });
     loading.value = false;
     update();
@@ -80,6 +77,4 @@ class RequestController extends GetxController {
   setOneTimeToken(String token) {
     oneTimeToken.value = token;
   }
-
-  
 }
