@@ -67,40 +67,35 @@ class ServiceHistoryScreen extends StatelessWidget {
                     return controller.isLoading.value
                         ? const Center(
                             child: SpinKitCubeGrid(color: Color(0xff436eee)))
-                        : controller.connect.value.contains('no')
-                            ? const Center(
-                                child: Text('No internet connection '),
+                        : controller.requestList.isEmpty
+                            ? Center(
+                                child: Text(
+                                  "You haven't filed any complaint",
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 18,
+                                    color: Colors.redAccent,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               )
-                            : controller.connect.value.contains('yes')
-                                ? Center(
-                                    child: Text(
-                                      "You haven't filed any complaint",
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 18,
-                                        color: Colors.redAccent,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  )
-                                : ListView.builder(
-                                    itemCount: controller.requestList.length,
-                                    itemBuilder: (context, index) {
-                                      return serviceHistoryScreenContainer(
-                                        fem: fem,
-                                        ffem: ffem,
-                                        img: controller.requestList[index]
-                                            ['service']['image'],
-                                        title: controller.requestList[index]
-                                            ['service']['name'],
-                                        subtitle: DateFormat('dd-MM-yyyy')
-                                            .format(DateTime.parse(
-                                                controller.requestList[index]
-                                                    ['created_on'])),
-                                        description: controller
-                                            .requestList[index]['description'],
-                                      );
-                                    },
+                            : ListView.builder(
+                                itemCount: controller.requestList.length,
+                                itemBuilder: (context, index) {
+                                  return serviceHistoryScreenContainer(
+                                    fem: fem,
+                                    ffem: ffem,
+                                    img: controller.requestList[index]
+                                        ['service']['image'],
+                                    title: controller.requestList[index]
+                                        ['service']['name'],
+                                    subtitle: DateFormat('dd-MM-yyyy').format(
+                                        DateTime.parse(controller
+                                            .requestList[index]['created_on'])),
+                                    description: controller.requestList[index]
+                                        ['description'],
                                   );
+                                },
+                              );
                   }),
             )
           ],

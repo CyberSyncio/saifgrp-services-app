@@ -8,8 +8,6 @@ import '../../../repository/register_repository/register_repository.dart';
 import '../../../utils/utils.dart';
 import '../auth_controller/auth_controller.dart';
 import '../building_controller/building_controller.dart';
-import '../internet_connectivity_controller/internet_connectivity_controller.dart';
-
 class RegisterController extends GetxController {
 //>>>>>>>>>>>>>>>>>>>>>> EDITING CONTROLLER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
   final userNameController = TextEditingController().obs;
@@ -27,8 +25,6 @@ class RegisterController extends GetxController {
   final buildingId = ''.obs;
   final AuthMainScreenController _mainScreenController =
       AuthMainScreenController();
-  InternetConnectivityController connectivityController =
-      Get.put(InternetConnectivityController()).obs();
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
   final _api = RegisterRepository();

@@ -39,54 +39,79 @@ class UpdateProfileController extends GetxController {
   }
 
   getUserDetailApi() {
-    _api.getUserDetailApi(_header).then((value) async {
-      loading.value = false;
-      _userData = value;
-      userNameController.value.text = _userData['username'];
-      firstNameController.value.text = _userData['first_name'];
-      lastNameController.value.text = _userData['last_name'];
-    }).onError((error, stackTrace) {
-      loading.value = false;
-      Utils.snackBar("", "Something Went Wrong While Getting Your Data");
-    });
-    update();
+    try {
+      _api.getUserDetailApi(_header).then((value) async {
+        loading.value = false;
+        _userData = value;
+        userNameController.value.text = _userData['username'];
+        firstNameController.value.text = _userData['first_name'];
+        lastNameController.value.text = _userData['last_name'];
+      }).onError((error, stackTrace) {
+        loading.value = false;
+        Utils.snackBar("", "No Internet connection available", action: 'error');
+      });
+      update();
+    } catch (e) {
+      Utils.snackBar('Error', 'No Internet connection available',
+          action: 'error');
+    }
   }
 
   updateProfileApi() async {
-    loading.value = true;
-    update();
-    var data = {
-      "username": _userData['username'] + "Sheraz",
-      "first_name": firstNameController.value.text,
-      "last_name": lastNameController.value.text,
-    };
-    await _api.updateProfileApi(data, _header).then((value) async {
-      Get.toNamed(RoutesName.homeMainScreen);
-      Utils.snackBar("Profile Update", "Profile updated successfully",
-          action: 'success');
+    try {
+      loading.value = true;
+      update();
+      var data = {
+        "first_name": firstNameController.value.text,
+        "last_name": lastNameController.value.text,
+      };
+      if (firstNameController.value.text.isEmpty ||
+          lastNameController.value.text.isEmpty) {
+        Utils.snackBar('Error', 'Please Fill both the Fields', action: 'error');
+        loading.value = false;
+        update();
+      } else if (firstNameController.value.text.isNum ||
+          lastNameController.value.text.isNum) {
+        Utils.snackBar('Error', 'first and last name should not be a number',
+            action: 'error');
+        loading.value = false;
+        update();
+      } else {
+        await _api.updateProfileApi(data, _header).then((value) async {
+          Utils.snackBar("Profile Update", "Profile updated successfully",
+              action: 'success');
+          loading.value = false;
+          update();
+          Get.toNamed(RoutesName.homeMainScreen);
+        }).onError((error, stackTrace) {
+          var errorr = jsonDecode(error.toString());
+          String errorMessage = '';
+          for (var entry in errorr.entries) {
+            String fieldName = entry.key;
+            List<String> errorMessages = (entry.value as List).cast<String>();
+            errorMessage +=
+                '${capitalizeFirstLetter(fieldName)}: ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
+          }
+          Utils.snackBar('Error', errorMessage, action: 'error');
+        });
+        loading.value = false;
+        update();
+      }
+    } catch (e) {
+      Utils.snackBar('Error', 'Check your internet connection and try again',
+          action: 'error');
       loading.value = false;
       update();
-    }).onError((error, stackTrace) {
-      var errorr = jsonDecode(error.toString());
-      String errorMessage = '';
-      for (var entry in errorr.entries) {
-        String fieldName = entry.key;
-        List<String> errorMessages = (entry.value as List).cast<String>();
-        errorMessage +=
-            '${capitalizeFirstLetter(fieldName)}: ${errorMessages.map((msg) => capitalizeFirstLetter(msg)).join(', ')}\n';
-      }
-      Utils.snackBar('Error', errorMessage, action: 'error');
-    });
+    }
     loading.value = false;
     update();
-    // }
+    Get.toNamed(RoutesName.homeMainScreen);
   }
 
   String capitalizeFirstLetter(String input) {
     if (input.isEmpty) {
       return input;
     }
-
     return input[0].toUpperCase() + input.substring(1);
   }
 }

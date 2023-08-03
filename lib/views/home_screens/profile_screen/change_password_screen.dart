@@ -156,10 +156,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             ),
                             SizedBox(height: 30 * fem),
                             InkWell(
-                              onTap: () {
+                              onTap: () async{
                                 if (controller.loading.value) {
                                 } else {
-                                  controller.changePasswordApi();
+                                 await controller.changePasswordApi();
                                 }
                               },
                               child: Container(

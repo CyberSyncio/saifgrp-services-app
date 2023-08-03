@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import '../../../repository/login_repository/login_repo.dart';
 import '../../../utils/routes/routes_name.dart';
 import '../../../utils/utils.dart';
-import '../internet_connectivity_controller/internet_connectivity_controller.dart';
 import '../user_session_controller/store_user_data.dart';
 
 class LoginController extends GetxController {
@@ -22,8 +21,6 @@ class LoginController extends GetxController {
   var usertoken = ''.obs;
   final loading = false.obs;
   StoreUserData userData = Get.put(StoreUserData());
-  InternetConnectivityController connectivityController =
-      Get.put(InternetConnectivityController()).obs();
   //>>>>>>>>>>>>>>>>>>>>>> POST API CALL OF REPO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
   final _api = LoginRepository();
@@ -38,8 +35,7 @@ class LoginController extends GetxController {
       };
       await _api.loginApi(data).then((value) async {
         await userData.login(value['key']);
-        Get.offAndToNamed(RoutesName.homeMainScreen,
-            arguments: usertoken.value);
+        Get.offAllNamed(RoutesName.homeMainScreen, arguments: usertoken.value);
         emailController.value.clear();
         passwordController.value.clear();
         loading.value = false;

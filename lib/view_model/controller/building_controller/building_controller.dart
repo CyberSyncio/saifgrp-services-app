@@ -11,6 +11,7 @@ class BuildingController extends GetxController {
   @override
   void onInit() async {
     await getBuilding();
+    service.getServices();
     super.onInit();
   }
 

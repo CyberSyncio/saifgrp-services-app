@@ -1,6 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -121,24 +118,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           Obx(
                             () => InkWell(
                                 onTap: () async {
-                                  bool isInternetWorking = controller
-                                              .connectivityController
-                                              .connectivityResult
-                                              .value ==
-                                          ConnectivityResult.mobile ||
-                                      controller.connectivityController
-                                              .connectivityResult.value ==
-                                          ConnectivityResult.wifi;
-                                  if (isInternetWorking) {
+                                  
                                     if (controller.loading.value) {
                                     } else {
                                       await controller.loginApi();
                                     }
-                                  } else {
-                                    Utils.snackBar(
-                                        'Error', 'No Internet Connection ',
-                                        action: 'error');
-                                  }
                                 },
                                 child: Container(
                                   alignment: Alignment.center,

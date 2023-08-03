@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/view_model/controller/register_screen_controller/register_screen_controller.dart';
@@ -209,24 +208,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               SizedBox(height: 30 * fem),
                               InkWell(
                                 onTap: () async {
-                                  bool isInternetWorking = controller
-                                              .connectivityController
-                                              .connectivityResult
-                                              .value ==
-                                          ConnectivityResult.mobile ||
-                                      controller.connectivityController
-                                              .connectivityResult.value ==
-                                          ConnectivityResult.wifi;
-                                  if (isInternetWorking) {
+                                 
+                                 
                                     if (controller.loading.value) {
                                     } else {
                                       controller.getBuildingId();
                                      await controller.registerApi();
-                                    }
-                                  } else {
-                                    Utils.snackBar(
-                                        'Error', 'No Internet Connection ',
-                                        action: 'error');
+                                    
                                   }
                                 },
                                 child: Container(

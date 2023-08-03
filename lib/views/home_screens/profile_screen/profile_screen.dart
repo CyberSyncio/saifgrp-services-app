@@ -97,10 +97,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   icon: Icons.person),
                               SizedBox(height: 10 * fem),
                               InkWell(
-                                onTap: () {
+                                onTap: () async {
                                   if (controller.loading.value) {
                                   } else {
-                                    controller.updateProfileApi();
+                                    await controller.updateProfileApi();
                                   }
                                 },
                                 child: Container(

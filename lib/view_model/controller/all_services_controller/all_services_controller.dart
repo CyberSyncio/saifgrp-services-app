@@ -18,11 +18,12 @@ class AllServicesController extends GetxController {
     try {
       serviceListModel = await _servicesRepo.getServices();
       update();
-      print(serviceListModel);
       isRefresh = false.obs;
       isLoading = false.obs;
       update();
-    } catch (e) {}
+    } catch (e) {
+      
+    }
     isRefresh = false.obs;
     isLoading = false.obs;
     update();

@@ -104,16 +104,6 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
                           ComplaintFormField(
                             fem: fem,
                             ffem: ffem,
-                            title: 'Name',
-                            hint: 'Your Name',
-                            icon: Icons.person,
-                            keyboardType: TextInputType.name,
-                            controller: controller.nameController.value,
-                            focusNode: controller.nameFocusNode.value,
-                          ),
-                          ComplaintFormField(
-                            fem: fem,
-                            ffem: ffem,
                             title: 'Flat no',
                             hint: 'AB23',
                             icon: Icons.apartment_rounded,

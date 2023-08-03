@@ -94,47 +94,36 @@ class AllServicesScreen extends StatelessWidget {
                       ],
                     ),
                     Expanded(
-                      child: serviceController.serviceListModel.isEmpty
-                          ? const Center(
-                              child: Text('No Internet Connection'),
-                            )
-                          : GetBuilder<AllServicesController>(
-                              builder: (controller) {
-                              return controller.isLoading.value
-                                  ? const Center(
-                                      child: SpinKitCubeGrid(
-                                        color: Color(0xff436eee),
-                                      ),
-                                    )
-                                  : controller.isLoading.value == false &&
-                                          controller.serviceListModel.isEmpty
-                                      ? Utils.snackBar('Error',
-                                          'Data Is Not Fetched Please Check Your Internet Connection',
-                                          action: 'error')
-                                      : ListView.builder(
-                                          itemCount: controller
-                                              .serviceListModel.length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return serviceScreenContainer(
-                                              fem: fem,
-                                              ffem: ffem,
-                                              serviceId: controller
-                                                      .serviceListModel[index]
-                                                  ['id'],
-                                              img: controller
-                                                      .serviceListModel[index]
-                                                  ['image'],
-                                              title: controller
-                                                      .serviceListModel[index]
-                                                  ['name'],
-                                              subtitle: controller
-                                                      .serviceListModel[index]
-                                                  ['description'],
-                                            );
-                                          },
-                                        );
-                            }),
+                      child: GetBuilder<AllServicesController>(
+                          init: AllServicesController(),
+                          builder: (controller) {
+                            return controller.isLoading.value
+                                ? const Center(
+                                    child: SpinKitCubeGrid(
+                                      color: Color(0xff436eee),
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    itemCount:
+                                        controller.serviceListModel.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return serviceScreenContainer(
+                                        fem: fem,
+                                        ffem: ffem,
+                                        serviceId: controller
+                                            .serviceListModel[index]['id'],
+                                        img: controller.serviceListModel[index]
+                                            ['image'],
+                                        title: controller
+                                            .serviceListModel[index]['name'],
+                                        subtitle:
+                                            controller.serviceListModel[index]
+                                                ['description'],
+                                      );
+                                    },
+                                  );
+                          }),
                     )
                   ],
                 ),
