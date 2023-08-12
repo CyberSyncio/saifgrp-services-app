@@ -75,104 +75,126 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     init: UpdateProfileController(),
                     builder: (controller) {
                       return Form(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              ProfileFormField(
-                                  controller:
-                                      controller.firstNameController.value,
-                                  fem: fem,
-                                  ffem: ffem,
-                                  title: 'First Name',
-                                  hint: 'First Name',
-                                  icon: Icons.person),
-                              ProfileFormField(
-                                  //  controller.lastNameFocusNode.value,
-                                  controller:
-                                      controller.lastNameController.value,
-                                  fem: fem,
-                                  ffem: ffem,
-                                  title: 'Last Name',
-                                  hint: 'Last Name',
-                                  icon: Icons.person),
-                              SizedBox(height: 10 * fem),
-                              InkWell(
-                                onTap: () async {
-                                  if (controller.loading.value) {
-                                  } else {
-                                    await controller.updateProfileApi();
-                                  }
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: 370 * fem,
-                                  height: 50 * fem,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xff436eee),
-                                    borderRadius:
-                                        BorderRadius.circular(10 * fem),
-                                  ),
-                                  child: controller.loading.value
-                                      ? const Center(
-                                          child: SpinKitCircle(
-                                              size: 24, color: Colors.white))
-                                      : Text(
-                                          'Update Profile',
-                                          style: SafeGoogleFont(
-                                            'Montserrat',
-                                            fontSize: 18 * ffem,
-                                            fontWeight: FontWeight.w800,
-                                            height: 1.2175 * ffem / fem,
-                                            color: const Color(0xffffffff),
-                                          ),
-                                        ),
+                        child: Column(
+                          children: [
+                            ProfileFormField(
+                                controller:
+                                    controller.firstNameController.value,
+                                fem: fem,
+                                ffem: ffem,
+                                title: 'First Name',
+                                hint: 'First Name',
+                                icon: Icons.person),
+                            ProfileFormField(
+                                //  controller.lastNameFocusNode.value,
+                                controller:
+                                    controller.lastNameController.value,
+                                fem: fem,
+                                ffem: ffem,
+                                title: 'Last Name',
+                                hint: 'Last Name',
+                                icon: Icons.person),
+                            SizedBox(height: 10 * fem),
+                            InkWell(
+                              onTap: () async {
+                                if (controller.loading.value) {
+                                } else {
+                                  await controller.updateProfileApi();
+                                }
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: 370 * fem,
+                                height: 50 * fem,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xff436eee),
+                                  borderRadius:
+                                      BorderRadius.circular(10 * fem),
                                 ),
-                              ),
-                              SizedBox(height: 22 * fem),
-                              Row(
-                                children: [
-                                  const SizedBox(width: 28),
-                                  GestureDetector(
-                                    onTap: () => Get.toNamed(
-                                      RoutesName.changPasswordScreen,
-                                    ),
-                                    child: Text(
-                                      'Change Password',
-                                      style: SafeGoogleFont(
-                                        'montserrat',
-                                        fontSize: 18 * ffem,
-                                        fontWeight: FontWeight.w600,
-                                        height: 1.2125 * ffem / fem,
-                                        color: const Color(0xff436eee),
+                                child: controller.loading.value
+                                    ? const Center(
+                                        child: SpinKitCircle(
+                                            size: 24, color: Colors.white))
+                                    : Text(
+                                        'Update Profile',
+                                        style: SafeGoogleFont(
+                                          'Montserrat',
+                                          fontSize: 18 * ffem,
+                                          fontWeight: FontWeight.w800,
+                                          height: 1.2175 * ffem / fem,
+                                          color: const Color(0xffffffff),
+                                        ),
                                       ),
+                              ),
+                            ),
+                            SizedBox(height: 22 * fem),
+                            Row(
+                              children: [
+                                const SizedBox(width: 28),
+                                GestureDetector(
+                                  onTap: () => Get.toNamed(
+                                    RoutesName.changPasswordScreen,
+                                  ),
+                                  child: Text(
+                                    'Change Password',
+                                    style: SafeGoogleFont(
+                                      'montserrat',
+                                      fontSize: 18 * ffem,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.2125 * ffem / fem,
+                                      color: const Color(0xff436eee),
                                     ),
                                   ),
-                                  SizedBox(width: ffem * 200),
-                                  GestureDetector(
-                                    onTap: () {
-                                      sessionController.logout();
-                                      Get.toNamed(
-                                        RoutesName.authMainScreen,
-                                      );
-                                    },
-                                    child: Text(
-                                      'LogOut',
-                                      style: SafeGoogleFont(
-                                        'montserrat',
-                                        fontSize: 18 * ffem,
-                                        fontWeight: FontWeight.w600,
-                                        height: 1.2125 * ffem / fem,
-                                        color: const Color(0xff436eee),
-                                      ),
+                                ),
+                                SizedBox(width: ffem * 200),
+                                GestureDetector(
+                                  onTap: () {
+                                    sessionController.logout();
+                                    Get.toNamed(
+                                      RoutesName.authMainScreen,
+                                    );
+                                  },
+                                  child: Text(
+                                    'LogOut',
+                                    style: SafeGoogleFont(
+                                      'montserrat',
+                                      fontSize: 18 * ffem,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.2125 * ffem / fem,
+                                      color: const Color(0xff436eee),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       );
-                    })
+                    }),
+SizedBox(height:230*fem),
+                    RichText(
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                        text: "Powered by ",
+                        style: SafeGoogleFont(
+                          "Montserrat",
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xff1f2c34),
+                        ),
+                        children: [
+                          TextSpan(
+                              text: "Cyber Sync Technologies",
+                              style: SafeGoogleFont(
+                                "Montserrat",
+                                fontSize: 13,
+                                color: const Color(0xff1f2c34),
+                              )),
+                        ])),
+
+
+
               ],
             ),
           )),
