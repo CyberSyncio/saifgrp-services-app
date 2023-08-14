@@ -11,4 +11,9 @@ class AppUrl {
   static const String buildingUrl = "$baseUrl/api/v1/buildings/";
   static const String complaintHistoryUrl = "$baseUrl/api/v1/requests/";
   static const String resetWebUrl = "$baseUrl/accounts/password/reset/";
+  static const String cyberSyncUrl = "https://cybersynctech.com/";
+  static const String privacyPolicy = "https://saifgrp.com/privacy-policy/";
+
+
+
 }

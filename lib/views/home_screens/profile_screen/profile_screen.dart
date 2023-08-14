@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapp/utils/app_url/app_url.dart';
 import 'package:myapp/utils/routes/routes_name.dart';
 import 'package:myapp/view_model/controller/update_profile_controller/update_profile_controller.dart';
 import 'package:myapp/view_model/controller/user_session_controller/store_user_data.dart';
 import 'package:myapp/views/home_screens/profile_screen/profile_screen_component/profile_form_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/utils.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -23,9 +25,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     double baseWidth = 428;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double desiredSizedBoxHeight = 210 * fem; // You can adjust this value
     return Scaffold(
       body: Container(
           height: double.infinity,
@@ -171,33 +176,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       );
                     }),
-SizedBox(height:230*fem),
-                    RichText(
-                    softWrap: true,
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                        text: "Powered by ",
-                        style: SafeGoogleFont(
-                          "Montserrat",
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xff1f2c34),
-                        ),
-                        children: [
-                          TextSpan(
-                              text: "Cyber Sync Technologies",
-                              style: SafeGoogleFont(
-                                "Montserrat",
-                                fontSize: 13,
-                                color: const Color(0xff1f2c34),
-                              )),
-                        ])),
+
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*.205,
+                ),
+                InkWell(
+                  onTap: () {
+                    // Add your URL here
+                    String url = AppUrl.cyberSyncUrl;
+                    launch(url);
+                  },
+                  child: RichText(
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                          text: "Powered by ",
+                          style: SafeGoogleFont(
+                            "Montserrat",
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff1f2c34),
+                          ),
+                          children: [
+                            TextSpan(
+                                text: "Cyber Sync Technologies",
+                                style: SafeGoogleFont(
+                                  "Montserrat",
+                                  fontSize: 13,
+                                  color: const Color(0xff1f2c34),
+                                )),
+                          ])),
+                ),
 
 
 
               ],
             ),
           )),
+
     );
   }
 }

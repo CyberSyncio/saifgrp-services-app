@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/view_model/controller/auth_controller/auth_controller.dart';
 import 'package:myapp/views/auth_screen/register_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../utils/app_url/app_url.dart';
 import 'login_screen.dart';
 
 class AuthMainScreen extends StatefulWidget {
@@ -86,10 +88,56 @@ class _AuthMainScreenState extends State<AuthMainScreen>
               child: TabBarView(
                   controller: tabController,
                   children: const [LoginScreen(), RegisterScreen()]),
-            )
+            ),
+
+
+
+
+              Padding(
+                padding: const EdgeInsets.only(top: 9.0),
+                child:  InkWell(
+                    onTap: () {
+                      // Add your URL here
+                      String url = AppUrl.privacyPolicy;
+                      launch(url);
+                    },
+
+                    child: Text("Privacy policies")),
+              ),
+            SizedBox(height: MediaQuery.of(context).size.height*0.020,)
           ],
         ),
       ),
     ));
   }
 }
+// SizedBox(
+//   height: MediaQuery.of(context).size.height*.205,
+// ),
+// InkWell(
+//   onTap: () {
+//     // Add your URL here
+//     String url = AppUrl.cyberSyncUrl;
+//     launch(url);
+//   },
+//   child: RichText(
+//       softWrap: true,
+//       textAlign: TextAlign.center,
+//       text: TextSpan(
+//           text: "Powered by ",
+//           style: SafeGoogleFont(
+//             "Montserrat",
+//             fontSize: 16,
+//             fontWeight: FontWeight.bold,
+//             color: const Color(0xff1f2c34),
+//           ),
+//           children: [
+//             TextSpan(
+//                 text: "Cyber Sync Technologies",
+//                 style: SafeGoogleFont(
+//                   "Montserrat",
+//                   fontSize: 13,
+//                   color: const Color(0xff1f2c34),
+//                 )),
+//           ])),
+// ),
